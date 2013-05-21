@@ -17,6 +17,7 @@
 <jsp:include page="../header.jsp" />
 
 <div id="Function">
+<form action="student/personalInfo/naturalInfo.jsp" method="post">
 	<table width="80%" class="TABLE_BODY" bordercolor="#777777" border="1" style="border-color:#777777;border-collapse:collapse">
 		<tr>
 			<th colspan="6" class="TABLE_TH" >基本信息</th>
@@ -59,8 +60,16 @@
 			<td class="TABLE_TD_02" >学科门类</td>
 			<td class="TABLE_TD_01"></td>
 		</tr>
-	</table>
+		<tr>
+			<td class="TABLE_TD_01" colspan="6">
+				<center><input type="submit" value="保存" name="save" /></center>
+			</td>
+		</tr>
+	</table>		
+</form>
 </div>
+
+<div class="Line"></div>
 
 </body>
 </html>

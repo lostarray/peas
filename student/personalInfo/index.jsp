@@ -19,13 +19,13 @@
 <div id="Function">
 	<ul>
 		<li><a href="student/personalInfo/basicInfo.jsp">
-			<img src="image/common/2.png" alt="" /><br />基本信息查看</a>
+			<img src="image/common/2.png" alt="" /><br />基本信息</a>
 		</li>
-		<li><a href="student/personalInfo/modifyInfo.jsp">
-			<img src="image/common/4.png" alt="" /><br />基本信息修改</a>
+		<li><a href="student/personalInfo/naturalInfo.jsp">
+			<img src="image/common/4.png" alt="" /><br />自然信息</a>
 		</li>
 		<li><a href="student/personalInfo/graduateInfo.jsp">
-			<img src="image/common/1.png" alt="" /><br />毕业信息核对</a>
+			<img src="image/common/1.png" alt="" /><br />毕业信息</a>
 		</li>
 	</ul>
 </div>

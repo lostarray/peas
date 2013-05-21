@@ -23,18 +23,18 @@
 <%
 	String username = request.getParameter("username");
 	String password = request.getParameter("password");
-	if (username == null || password == null)
-		response.sendRedirect("");
-
-	try {
-		Class.forName("com.mysql.jdbc.Driver");
-		// out.println("Driver loaded");
-	} catch (ClassNotFoundException e) {
-		// out.println("Driver not found!");
+	if (username.isEmpty() || password.isEmpty()) {
+		response.sendRedirect("index.jsp?errormsg=blank_username_or_password");
+		return;
 	}
 
 	try {
-		connection = DriverManager.getConnection("jdbc:mysql://114.212.130.250/pybdb","admin","pyb15");
+		Class.forName("com.mysql.jdbc.Driver");
+	} catch (ClassNotFoundException e) {
+	}
+
+	try {
+		connection = DriverManager.getConnection("jdbc:mysql://114.212.134.13/pybdb","admin","pyb15");
 		// out.println("Database connected");
 		statement = connection.createStatement();
 		String sql = "SELECT uname, role FROM user WHERE uid = '" + username + "' AND passwd = '" + password + "';";
@@ -50,7 +50,7 @@
 				case 3:	response.sendRedirect("student");	break;
 			}
 		} else {
-			response.sendRedirect("");
+			response.sendRedirect("index.jsp?errormsg=wrong_username_or_password");
 		}
 		connection.close();
 	} catch (SQLException e1) {

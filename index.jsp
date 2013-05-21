@@ -31,6 +31,14 @@
 				<div id="Login">
 					<font style="font-size: 12px;font-weight:bold;color: #FF0000"></font><br />
 					<form action="login.jsp" method="post">
+						<%
+						String errormsg = request.getParameter("errormsg");
+						if (errormsg == null);
+						else if (errormsg.equals("blank_username_or_password"))
+							%><font color="#FF0000">用户名或密码不能为空！</font><br /><%
+						else if (errormsg.equals("wrong_username_or_password"))
+							%><font color="#FF0000">用户名或密码错误！</font><br /><%
+						%>
 						<label for:"username">用户名</label>
 						<input name="username" type="text" class="InputBox Username" /><br />
 						<label for:"password">密　码</label>
@@ -45,7 +53,7 @@
 						<li>用户名与初始密码为admin。</li><br/>
 						<label style="color: red;font-size: 12px;">教师登录：</label>
 						<li>用户名与初始密码为院系编号，如001。</li><br/>
-						<label style="color: red;font-size: 12px;">新生登陆：</label>
+						<label style="color: red;font-size: 12px;">学生登陆：</label>
 						<li>用户名与初始密码为学号。</li><br/>
 					</ul>
 				</div>
