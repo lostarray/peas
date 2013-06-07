@@ -53,7 +53,7 @@ public class Total implements LogicControl {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");// 加载Mysql数据驱动
 			
-			connection = DriverManager.getConnection("jdbc:mysql://114.212.134.13/pybdb", "admin", "pyb15");// 创建数据连接
+			connection = DriverManager.getConnection("jdbc:mysql://114.212.134.238/pybdb", "admin", "pyb15");// 创建数据连接
 			
 		} catch (Exception e) {
 			System.out.println("Fail to connect the db!!" + e.getMessage());
@@ -108,9 +108,10 @@ public class Total implements LogicControl {
 		ResultSet resultset = null;
 		try {
 			Statement statement = connection.createStatement();
-			//
-			String sql = "select stuno,stuname,StudentInfo.gender,StudentInfo.majorno,mname,admissiontime,tname,culturednature,master_doctor,schoolrollstate,nationality,familyaddr,zip,homephone,telephone,email,personid,ethnicity" + 
-						 " from StudentInfo LEFT JOIN TeacherInfo ON StudentInfo.teacherno = TeacherInfo.teacherno LEFT JOIN MajorInfo ON StudentInfo.majorno = MajorInfo.majorno " + 
+			
+			//学号，姓名，性别，专业代码，专业，出生年月，入学日期，导师，培养性质，攻读学位，学籍状态，国籍，身份证号，名族
+			String sql = "select stuno,stuname,StudentInfo.gender,StudentInfo.specialityno,speciality,birthdate,admissiontime,TeacherInfo.name,culturednature,master_doctor,schoolrollstate,nationality,personid,ethnicity" + 
+						 " from StudentInfo LEFT JOIN TeacherInfo ON StudentInfo.teacherno = TeacherInfo.teacherno LEFT JOIN MajorInfo ON StudentInfo.specialityno = MajorInfo.specialityno " + 
 						 "where StudentInfo.stuno = '" + username + "'";
 			resultset = statement.executeQuery(sql);
 			
@@ -132,18 +133,50 @@ public class Total implements LogicControl {
 	@Override
 	public ResultSet getNaturalInfo(String username) {
 		// TODO Auto-generated method stub
-		return null;
+		ResultSet resultset = null;
+		try {
+			Statement statement = connection.createStatement();
+			
+			//拼音姓名，家庭住址，家庭所在地车站名，家庭电话，手机号码，E-mail,邮编
+			String sql = "select pinyin,familyaddr,stationname,homephone,phonenum,email,zip" + 
+						 " from StudentInfo " + 
+						 "where StudentInfo.stuno = '" + username + "'";
+			resultset = statement.executeQuery(sql);
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return resultset;
 	}
 
 	@Override
 	public ResultSet getGraduateInfo(String username) {
 		// TODO Auto-generated method stub
-		return null;
+		ResultSet resultset = null;
+		try {
+			Statement statement = connection.createStatement();
+			
+			//学号，姓名，性别，导师，毕业日期，证书编号
+			String sql = "select stuno,stuname,gender,TeacherInfo.name,graduatedate,certificate_no" + 
+						 " from StudentInfo LEFT JOIN TeacherInfo ON StudentInfo.teacherno = TeacherInfo.teacherno " + 
+						 "where StudentInfo.stuno = '" + username + "'";
+			resultset = statement.executeQuery(sql);
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return resultset;
 	}
 
 	@Override
 	public ResultSet displayourseInfo(String username, String classkind) {
 		// TODO Auto-generated method stub
+		
+		
 		return null;
 	}
 

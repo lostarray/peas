@@ -1,11 +1,14 @@
 package peas;
 
 public class TeacherInfo {
+	private String teacherno;
 	private String name;
 	private String ename;
 	private String title;//职称
 	private String gender;//性别
 	private String remark;//备注
+	private String Specialityno; //专业号
+	
 	public TeacherInfo() { //默认构造函数
 
 	}
@@ -44,6 +47,18 @@ public class TeacherInfo {
 	}
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+	public String getTeacherno() {
+		return teacherno;
+	}
+	public void setTeacherno(String teacherno) {
+		this.teacherno = teacherno;
+	}
+	public String getSpecialityno() {
+		return Specialityno;
+	}
+	public void setSpecialityno(String specialityno) {
+		Specialityno = specialityno;
 	}
 
 }

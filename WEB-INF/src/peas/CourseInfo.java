@@ -12,7 +12,7 @@ public class CourseInfo {
 	private int numofelec;//选课人数
 	private int weekno;//上课周数
 	private String grade;//上课年级
-	private boolean isodd;//单双周
+	private int isodd;//0 单双周 1单周 2双周
 	private String speciality;//所属专业
 	private String schoolarea;//所属校区
 	
@@ -21,8 +21,11 @@ public class CourseInfo {
 	private String coursetype;		//课程大类
 	private int credit;				//学分
 	private int classhour;			//学时
-	private	String type;			//课程子类型
+	private	String subtype;			//课程子类型
 	private String property;		//性质
+	private String coursename;		//课程名
+	private String ename;			//英文名
+	
 	
 	public CourseInfo() { //默认构造函数
 
@@ -79,7 +82,7 @@ public class CourseInfo {
 		return grade;
 	}
 	
-	public boolean isIsodd() {
+	public int isIsodd() {
 		return isodd;
 	}
 	
@@ -100,7 +103,7 @@ public class CourseInfo {
 	}
 	
 	public String getType() {
-		return type;
+		return subtype;
 	}
 	
 	public String getProperty() {
@@ -109,6 +112,14 @@ public class CourseInfo {
 	
 	public String getCourseno() {
 		return courseno;
+	}
+	
+	public String getCoursename() {
+		return coursename;
+	}
+	
+	public String getEname() {
+		return ename;
 	}
 	
 	public void setCoursetype(String coursetype) {
@@ -155,7 +166,7 @@ public class CourseInfo {
 		this.grade = grade;
 	}
 	
-	public void setIsodd(boolean isodd) {
+	public void setIsodd(int isodd) {
 		this.isodd = isodd;
 	}
 	
@@ -175,8 +186,8 @@ public class CourseInfo {
 		this.classhour = classhour;
 	}
 	
-	public void setType(String type) {
-		this.type = type;
+	public void setType(String subtype) {
+		this.subtype = subtype;
 	}
 	
 	public void setProperty(String property) {
@@ -185,6 +196,14 @@ public class CourseInfo {
 	
 	public void setCourseno(String courseno) {
 		this.courseno = courseno;
+	}
+	
+	public void setCoursename(String coursename) {
+		this.coursename = coursename;
+	}
+	
+	public void setEname(String ename) {
+		this.ename = ename;
 	}
 
 }

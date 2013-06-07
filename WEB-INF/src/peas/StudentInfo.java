@@ -9,7 +9,7 @@ public class StudentInfo {
 	private String speciality;
 	private String birthdate;
 	private String admissiontime;	//入学时间
-	private String teacher;
+	private String teacherno;
 	private String culturednature;	//培养性质
 	private String master_doctor;	//硕士或博士
 	private String schoolrollstate;	//学籍状态
@@ -72,7 +72,7 @@ public class StudentInfo {
 	}
 	
 	public String getTeacher() {
-		return teacher;
+		return teacherno;
 	}
 	
 	public String getCulturednature() {
@@ -171,8 +171,8 @@ public class StudentInfo {
 		this.admissiontime = admissiontime;
 	}
 	
-	public void setTeacher(String teacher) {
-		this.teacher = teacher;
+	public void setTeacher(String teacherno) {
+		this.teacherno = teacherno;
 	}
 	
 	public void setCulturednature(String culturednature) {
