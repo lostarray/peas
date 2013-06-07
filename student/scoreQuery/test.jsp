@@ -85,6 +85,54 @@
 					<!--  <th align="center">交换成绩对应课程</th>-->
 					<!--  <th align="center">操作</th>-->
 				</tr>
+				<tr align="left" class="TABLE_TR_01">
+					<td align="center" valign="middle">1</td>
+					<td align="center" valign="middle">002850</td>
+					<td valign="middle">中国古代人生哲学</td>
+					<td valign="middle">Classical Chinese Philosophy of Human Life</td>
+					<td align="center" valign="middle">通识</td>
+					<td align="center" valign="middle">3</td>
+					<td align="center" valign="middle">
+						<ul style="color:black">0</ul>
+					</td>
+					<td align="center" valign="middle"></td>
+				</tr>
+				<tr align="left" class="TABLE_TR_02">
+					<td align="center" valign="middle">2</td>
+					<td align="center" valign="middle">000010</td>
+					<td valign="middle">马克思主义基本原理概论</td>
+					<td valign="middle">Basic Principles of Marxism</td>
+					<td align="center" valign="middle">通修</td>
+					<td align="center" valign="middle">3</td>
+					<td align="center" valign="middle">
+						<ul style="color:black">0</ul>
+					</td>
+					<td align="center" valign="middle"></td>
+				</tr>
+				<tr align="left" class="TABLE_TR_01">
+					<td align="center" valign="middle">3</td>
+					<td align="center" valign="middle">221030</td>
+					<td valign="middle">算法设计与分析</td>
+					<td valign="middle">Algorithm Design &amp; Analysis</td>
+					<td align="center" valign="middle">平台</td>
+					<td align="center" valign="middle">4</td>
+					<td align="center" valign="middle">
+						<ul style="color:black">0</ul>
+					</td>
+					<td align="center" valign="middle"></td>
+				</tr>
+				<tr align="left" class="TABLE_TR_02">
+					<td align="center" valign="middle">4</td>
+					<td align="center" valign="middle">221050</td>
+					<td valign="middle">计算机网络</td>
+					<td valign="middle">Foundations of Computer Networks</td>
+					<td align="center" valign="middle">平台</td>
+					<td align="center" valign="middle">4</td>
+					<td align="center" valign="middle">
+						<ul style="color:black">0</ul>
+					</td>
+					<td align="center" valign="middle"></td>
+				</tr>
 			</table>
 		</td>
 </div>

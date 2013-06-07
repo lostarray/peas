@@ -17,7 +17,11 @@
 <jsp:include page="../header.jsp" />
 
 <div id="Function">
-	
+	<ul>
+		<li><a href="student/electivePlan/test.jsp"><img src="image/common/1.png"><br>专业选课</a></li>
+		<li><a href="student/electivePlan/test.jsp"><img src="image/common/2.png"><br>体育选课</a></li>
+		<li><a href="student/electivePlan/test.jsp"><img src="image/common/3.png"><br>公共选课</a></li>
+	</ul>
 </div>
 
 <div class="Line"></div>
