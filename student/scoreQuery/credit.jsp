@@ -17,7 +17,27 @@
 <jsp:include page="../header.jsp" />
 
 <div id="Function">
-	
+	<td align="left" valign="top">
+	    <table width="95%" class="TABLE_BODY">
+			<tbody>
+			<tr class="TABLE_TH">
+				<th align="center">通修</th>
+				<th align="center">平台</th>
+				<th align="center">核心</th>
+				<th align="center">选修</th>
+				<th align="center">14学分课程</th>
+			</tr>
+				
+			<tr class="TABLE_TR_02">				    					    
+				<td align="center">0</td>
+				<td align="center">0</td>
+				<td align="center">0</td>
+				<td align="center">0</td>
+				<td align="center">0</td>
+			</tr>					
+			</tbody>
+		</table>				
+	</td>
 </div>
 
 <div class="Line"></div>
