@@ -2,8 +2,8 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 
 <%
-String uname = (String) session.getAttribute("uname");
-if (uname == null) { %>
+String name = (String) session.getAttribute("name");
+if (name == null) { %>
 	<jsp:forward page="/peas" /><%
 } %>
 
@@ -13,7 +13,7 @@ if (uname == null) { %>
 		<a href="/peas/student"><img src="image/Icon_Help.gif" alt="" />帮助</a>&nbsp;&nbsp;&nbsp;&nbsp;
 		<a href="/peas/logout.jsp"><img src="image/Icon_Exit.gif" alt="" />退出</a>
 	</div>
-	<div id="UserInfo">欢迎您：<%=uname%>&nbsp;&nbsp;&nbsp;&nbsp;当前身份：学生</div>			
+	<div id="UserInfo">欢迎您：<%=name%>&nbsp;&nbsp;&nbsp;&nbsp;当前身份：学生</div>			
 	<div id="Nav">
 		<ul>
 			<li><a href="student">首  页</a></li>

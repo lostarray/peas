@@ -20,7 +20,7 @@
 		<tr>
 			<td height="136">
 				<div id="Logo">
-					<a href="#"><img src="image/homepage/IndexLogo.png" border="0"> </a>
+					<a href=""><img src="image/homepage/IndexLogo.png" border="0"> </a>
 				</div>
 			</td>
 		</tr>
