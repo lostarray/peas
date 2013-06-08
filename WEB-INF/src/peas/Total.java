@@ -76,7 +76,7 @@ public class Total implements LogicControl {
 			//while(resultset.next())
 				
 			while(resultset.next()) {
-				System.out.println(resultset.getString(1));
+				//System.out.println(resultset.getString(1));
 				if (resultset.getInt(1)==2) {
 					sql = "select id,stuname,role" +
 						  " from UserInfo,StudentInfo " +
@@ -150,7 +150,30 @@ public class Total implements LogicControl {
 		}
 		return resultset;
 	}
-
+	
+	public boolean alterNaturalInfo(String stuno, String pinyin, String familyaddr, String stationname, String homephone, String phonenum, String email, String zip) {
+		stuInfo = new StudentInfo(stuno,pinyin,familyaddr,stationname,homephone,phonenum,email,zip);
+		//ResultSet resultset = null;
+		try {
+			Statement statement = connection.createStatement();
+			
+			//拼音姓名，家庭住址，家庭所在地车站名，家庭电话，手机号码，E-mail,邮编
+			String sql = "update StudentInfo " +
+						 "set pinyin = '" + stuInfo.getPinyin() + "',familyaddr = '" + stuInfo.getFamilyaddr() + "',stationname = '" + stuInfo.getStationname() + 
+						 "',homephone = '" + stuInfo.getHomephone() + "',phonenum = '" + stuInfo.getPhonenum() + "',email = '" + stuInfo.getEmail() + "',zip = '" + stuInfo.getZip() + "' " +
+						 "where stuno = '" + stuInfo.getStuno() + "'";
+			statement.executeUpdate(sql);
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("alter fail!");
+			return false;
+			//e.printStackTrace();
+		}
+		return true;
+	}
+	
 	@Override
 	public ResultSet getGraduateInfo(String username) {
 		// TODO Auto-generated method stub
@@ -159,7 +182,7 @@ public class Total implements LogicControl {
 			Statement statement = connection.createStatement();
 			
 			//学号，姓名，性别，导师，毕业日期，证书编号
-			String sql = "select stuno,stuname,gender,TeacherInfo.name,graduatedate,certificate_no" + 
+			String sql = "select stuno,stuname,StudentInfo.gender,TeacherInfo.name,graduatedate,certificate_no" + 
 						 " from StudentInfo LEFT JOIN TeacherInfo ON StudentInfo.teacherno = TeacherInfo.teacherno " + 
 						 "where StudentInfo.stuno = '" + username + "'";
 			resultset = statement.executeQuery(sql);
@@ -173,7 +196,7 @@ public class Total implements LogicControl {
 	}
 
 	@Override
-	public ResultSet displayourseInfo(String username, String classkind) {
+	public ResultSet displayCourseInfo(String username, String classkind) {
 		// TODO Auto-generated method stub
 		
 		
@@ -397,23 +420,25 @@ public class Total implements LogicControl {
 		Total t = new Total();
 		String id = "101220036";
 		String pwd = "101220036";
-		ResultSet r = t.login(id,pwd);
-		t.getBasicInfo(id);
-		if (r==null) {
+		t.login(id,pwd);
+		//ResultSet r = t.getBasicInfo(id);
+		//ResultSet r = t.getNaturalInfo(id);
+		//t.alterNaturalInfo(id,"houbojian","jiangsu","","","","","210");
+		/*if (r==null) {
 			System.out.println("null\n");
 		}
 		else
 		{
 			System.out.println("not null\n");
-		}
+		}*/
 			
-		try {
+		/*try {
 			while(r.next())
 				System.out.println(r.getString(1) + r.getString(2) + r.getString(3));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		
 	}
 

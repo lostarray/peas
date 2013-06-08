@@ -8,8 +8,9 @@ public interface LogicControl {
 	ResultSet login(String username, String password);//登陆
 	ResultSet getBasicInfo(String username);//获取学生基本信息
 	ResultSet getNaturalInfo(String username);//获取学生自然信息
+	boolean alterNaturalInfo(String stuno, String pinyin, String familyaddr, String stationname, String homephone, String phonenum, String email, String zip);//修改自然信息
 	ResultSet getGraduateInfo(String username);//获取学生毕业信息
-	ResultSet displayourseInfo(String username, String classkind);//显示选课信息
+	ResultSet displayCourseInfo(String username, String classkind);//显示选课信息
 	ResultSet getChosenCourseInfo(String courseno);//获取当前选课信息
 	boolean chooseCourse (String courseno, String classno);//选课
 	boolean withdrawCourse (String courseno, String classno);//退选

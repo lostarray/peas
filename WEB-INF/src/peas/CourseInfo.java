@@ -9,7 +9,8 @@ public class CourseInfo {
 	private int classno;//班级号
 	private int startweek;//上课开始星期
 	private int endweek;//上课结束星期
-	private int numofelec;//选课人数
+	private int numofelec;//已选人数
+	private int numoflimit;//人数上限
 	private int weekno;//上课周数
 	private String grade;//上课年级
 	private int isodd;//0 单双周 1单周 2双周
@@ -21,7 +22,7 @@ public class CourseInfo {
 	private String coursetype;		//课程大类
 	private int credit;				//学分
 	private int classhour;			//学时
-	private	String subtype;			//课程子类型
+	//private	String subtype;			//课程子类型
 	private String property;		//性质
 	private String coursename;		//课程名
 	private String ename;			//英文名
@@ -102,10 +103,6 @@ public class CourseInfo {
 		return classhour;
 	}
 	
-	public String getType() {
-		return subtype;
-	}
-	
 	public String getProperty() {
 		return property;
 	}
@@ -120,6 +117,11 @@ public class CourseInfo {
 	
 	public String getEname() {
 		return ename;
+	}
+	
+
+	public int getNumoflimit() {
+		return numoflimit;
 	}
 	
 	public void setCoursetype(String coursetype) {
@@ -186,10 +188,6 @@ public class CourseInfo {
 		this.classhour = classhour;
 	}
 	
-	public void setType(String subtype) {
-		this.subtype = subtype;
-	}
-	
 	public void setProperty(String property) {
 		this.property = property;
 	}
@@ -204,6 +202,10 @@ public class CourseInfo {
 	
 	public void setEname(String ename) {
 		this.ename = ename;
+	}
+	
+	public void setNumoflimit(int numoflimit) {
+		this.numoflimit = numoflimit;
 	}
 
 }

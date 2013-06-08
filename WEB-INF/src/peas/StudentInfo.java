@@ -36,6 +36,17 @@ public class StudentInfo {
 	public StudentInfo(StudentInfo stuInfo) {//根据对象构造
 
 	}
+	
+	public StudentInfo(String stuno, String pinyin, String familyaddr, String stationname, String homephone, String phonenum, String email, String zip) {
+		this.stuno = stuno;
+		this.pinyin = pinyin;
+		this.familyaddr = familyaddr;
+		this.stationname = stationname;
+		this.homephone = homephone;
+		this.phonenum = phonenum;
+		this.email = email;
+		this.zip = zip;
+	}
 	//public 各种get和set函数{
 
 	//}
