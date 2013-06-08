@@ -10,7 +10,7 @@ public class CourseInfo {
 	private int startweek;//上课开始星期
 	private int endweek;//上课结束星期
 	private int numofelec;//已选人数
-	private int numoflimit;//人数上限
+	private int maxelec;//人数上限
 	private int weekno;//上课周数
 	private String grade;//上课年级
 	private int isodd;//0 单双周 1单周 2双周
@@ -26,6 +26,9 @@ public class CourseInfo {
 	private String property;		//性质
 	private String coursename;		//课程名
 	private String ename;			//英文名
+	//add new
+	private String schoolyear;      //课程开设学年
+	private String schoolterm;      //课程开设学期
 	
 	
 	public CourseInfo() { //默认构造函数
@@ -120,8 +123,8 @@ public class CourseInfo {
 	}
 	
 
-	public int getNumoflimit() {
-		return numoflimit;
+	public int getMaxelec() {
+		return maxelec;
 	}
 	
 	public void setCoursetype(String coursetype) {
@@ -204,8 +207,8 @@ public class CourseInfo {
 		this.ename = ename;
 	}
 	
-	public void setNumoflimit(int numoflimit) {
-		this.numoflimit = numoflimit;
+	public void setMaxelec(int maxelec) {
+		this.maxelec = maxelec;
 	}
 
 }

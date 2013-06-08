@@ -426,7 +426,6 @@ public class Total implements LogicControl {
 		//t.alterNaturalInfo(id,"houbojian","jiangsu","","","","","210");
 		/*if (r==null) {
 			System.out.println("null\n");
-		}
 		else
 		{
 			System.out.println("not null\n");
@@ -439,7 +438,8 @@ public class Total implements LogicControl {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}*/
-		
+			}
+	
 	}
 
-}
+
