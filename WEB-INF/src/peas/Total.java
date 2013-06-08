@@ -159,7 +159,7 @@ public class Total implements LogicControl {
 			Statement statement = connection.createStatement();
 			
 			//学号，姓名，性别，导师，毕业日期，证书编号
-			String sql = "select stuno,stuname,gender,TeacherInfo.name,graduatedate,certificate_no" + 
+			String sql = "select stuno,stuname,StudentInfo.gender,TeacherInfo.name,graduatedate,certificate_no" + 
 						 " from StudentInfo LEFT JOIN TeacherInfo ON StudentInfo.teacherno = TeacherInfo.teacherno " + 
 						 "where StudentInfo.stuno = '" + username + "'";
 			resultset = statement.executeQuery(sql);
