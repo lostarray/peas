@@ -38,34 +38,24 @@
 			<td class="TABLE_TD_01"><%=resultset.getString("gender")%></td>
 		</tr>
 		<tr height="27">
-			<td class="TABLE_TD_02">出生日期</td>
-			<td class="TABLE_TD_01">1991年09月27日</td>
-			<td class="TABLE_TD_02">身份证号</td>
-			<td colspan="3" class="TABLE_TD_01">320304199109270416</td>
-		</tr>
-		<tr height="27">
 			<td class="TABLE_TD_02">所在专业</td>
-			<td class="TABLE_TD_01"><%=resultset.getString("mname")%></td>
-			<td class="TABLE_TD_02">导师</td>
-			<td class="TABLE_TD_01"><%=resultset.getString("tname")%></td>
-			<td class="TABLE_TD_02">培养性质</td>
-			<td class="TABLE_TD_01"><%=resultset.getString("culturednature")%></td>
-		</tr>
-		<tr height="27">
+			<td class="TABLE_TD_01"><%=resultset.getString("speciality")%></td>
 			<td class="TABLE_TD_02">入学时间</td>
 			<td class="TABLE_TD_01"><%=resultset.getString("admissiontime").substring(0, 10)%></td>
-			<td class="TABLE_TD_02">所属年级</td>
-			<td class="TABLE_TD_01">2010</td>
-			<td class="TABLE_TD_02">学制</td>
-			<td class="TABLE_TD_01">4.0</td>
+			<td class="TABLE_TD_02">导师</td>
+			<td class="TABLE_TD_01"><%=resultset.getString("TeacherInfo.name")%></td>
 		</tr>
 		<tr height="27">
+			<td class="TABLE_TD_02">硕士/博士</td>
+			<td class="TABLE_TD_01"><%=resultset.getString("master_doctor")%></td>
 			<td class="TABLE_TD_02">学籍状态</td>
-			<td class="TABLE_TD_01">有</td>
-			<td class="TABLE_TD_02">班级编号</td>
-			<td class="TABLE_TD_01"></td>
-			<td class="TABLE_TD_02" >学科门类</td>
-			<td class="TABLE_TD_01"></td>
+			<td class="TABLE_TD_01"><%=resultset.getString("schoolrollstate")%></td>
+			<td class="TABLE_TD_02">国籍</td>
+			<td class="TABLE_TD_01"><%=resultset.getString("nationality")%></td>
+		</tr>
+		<tr height="27">
+			<td class="TABLE_TD_02">身份证号</td>
+			<td class="TABLE_TD_01" colspan="5"><%=resultset.getString("personid")%></td>
 		</tr>
 	</table>
 </div>

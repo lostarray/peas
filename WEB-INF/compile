@@ -1,0 +1,5 @@
+#!/bin/sh
+if [ ! -d "classes" ]; then
+	mkdir classes
+fi
+javac src/peas/*.java -d classes/ -encoding gbk
