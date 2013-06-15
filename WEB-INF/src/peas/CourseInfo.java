@@ -126,14 +126,6 @@ public class CourseInfo {
 		return maxelec;
 	}
 	
-	public String getSchoolyear() {
-		return schoolyear;
-	}
-	
-	public String getSchoolterm() {
-		return schoolterm;
-	}
-	
 	public void setCoursetype(String coursetype) {
 		this.coursetype = coursetype;
 	}
@@ -217,7 +209,6 @@ public class CourseInfo {
 	public void setMaxelec(int maxelec) {
 		this.maxelec = maxelec;
 	}
-<<<<<<< HEAD
 	public String getSchoolyear() {
 		return schoolyear;
 	}
@@ -227,13 +218,6 @@ public class CourseInfo {
 	public String getSchoolterm() {
 		return schoolterm;
 	}
-=======
-	
-	public void setSchoolyear(String schoolyear) {
-		this.schoolyear = schoolyear;
-	}
-	
->>>>>>> 5e9e3ed16714fe15c364a6a7264fc92f4b659afb
 	public void setSchoolterm(String schoolterm) {
 		this.schoolterm = schoolterm;
 	}
