@@ -306,7 +306,7 @@ public class Total implements LogicControl {
 			Statement statement = connection.createStatement();
 			
 			//班级，上课地点，上课时间，教师，人数上限，已选人数
-			String sql = "select CourseInfo.courseno,coursename,schoolarea,TeacherInfo.name,coursetime,startweek,endweek,classroom,property " + 
+			String sql = "select CourseInfo.courseno,coursename,schoolarea,TeacherInfo.name,coursetime,startweek,endweek,classroom,property,CourseInfo.classno " + 
 						 "from CourseInfo,TeacherInfo,CourseSelection " + 
 						 "where CourseSelection.schoolyear = '" + schoolyear + "' and CourseSelection.schoolterm = '" + schoolterm + "' " +
 						 		"and CourseInfo.schoolyear = CourseSelection.schoolyear and CourseInfo.schoolterm = CourseSelection.schoolterm" +
@@ -621,7 +621,7 @@ public class Total implements LogicControl {
 		//ResultSet r = t.getGradeInfo(id, "2012-2013", "2");
 		ResultSet r = t.getMyCourseInfo(id, "2012-2013", "2");
 		while(r.next())
-			System.out.println(r.getString(1) + r.getString(2) + r.getString(3) + r.getString(4) + r.getString(5) + r.getString(6) + r.getString(7) + r.getString(8) + r.getString(9));
+			System.out.println(r.getString(1) + r.getString(2) + r.getString(3) + r.getString(4) + r.getString(5) + r.getString(6) + r.getString(7) + r.getString(8) + r.getString(9) + r.getString(10));
 		System.out.println("test over");
 		//t.login(id,pwd);
 		
