@@ -11,9 +11,10 @@ public interface LogicControl {
 	boolean alterNaturalInfo(String stuno, String pinyin, String familyaddr, String stationname, String homephone, String phonenum, String email, String zip);//修改自然信息
 	ResultSet getGraduateInfo(String username);//获取学生毕业信息
 	boolean chooseCourse (String courseno, String stuno, String schoolyear, String schoolterm, int grade, String remark, int classno);//选课
-	boolean isSelected(String stuno, String cournseno, String schoolyear, String schoolterm); //判断选课的状态
+	int isSelected(String stuno, String cournseno, String schoolyear, String schoolterm); //判断选课的状态
 	ResultSet displayCourseInfo(String username, String classkind, String schoolyear, String schoolterm);//显示选课信息
-	ResultSet getChosenCourseInfo(String courseno, String schoolyear, String schoolterm);//获取当前选课信息
+	ResultSet getChosenCourseInfo(String courseno, String schoolyear, String schoolterm);//获取当前选课深度信息
+	public ResultSet getMyCourseInfo(String stuno, String schoolyear, String schoolterm);//获取
 	boolean withdrawCourse (String stuno, String courseno, String schoolyear, String schoolterm, int classno);//退选
 	ResultSet getGradeInfo(String username, String schoolyear, String schoolterm);//成绩查看
 	int creditStatistics(String username, String coursetype);//统计学分
