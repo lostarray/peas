@@ -119,9 +119,8 @@ public class CourseInfo {
 		return ename;
 	}
 	
-
-	public int getNumoflimit() {
-		return numoflimit;
+	public int getMaxelec() {
+		return maxelec;
 	}
 	
 	public void setCoursetype(String coursetype) {
@@ -204,8 +203,20 @@ public class CourseInfo {
 		this.ename = ename;
 	}
 	
-	public void setNumoflimit(int numoflimit) {
-		this.numoflimit = numoflimit;
+	public void setMaxelec(int maxelec) {
+		this.maxelec = maxelec;
+	}
+	public String getSchoolyear() {
+		return schoolyear;
+	}
+	public void setSchoolyear(String schoolyear) {
+		this.schoolyear = schoolyear;
+	}
+	public String getSchoolterm() {
+		return schoolterm;
+	}
+	public void setSchoolterm(String schoolterm) {
+		this.schoolterm = schoolterm;
 	}
 
 }
