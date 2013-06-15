@@ -247,14 +247,6 @@ public class Total implements LogicControl {
 				  "where speciality = '" + speciality + "' and coursetype = '" + classkind + "' and schoolyear = '" + schoolyear + "' and schoolterm = '" + schoolterm + "' and (grade = '" + grade + "' or grade = '-1')";
 			resultset = statement.executeQuery(sql);
 			
-			try {
-			while(resultset.next())
-				System.out.println(resultset.getString(1) + resultset.getString(2) + resultset.getString("coursetype"));
-			} catch (SQLException e) {
-				
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -265,10 +257,32 @@ public class Total implements LogicControl {
 	}
 
 	@Override
-	public ResultSet getChosenCourseInfo(String courseno) {
+	public ResultSet getChosenCourseInfo(String courseno, String schoolyear, String schoolterm) {
 		// TODO Auto-generated method stub
-		
-		return null;
+		ResultSet resultset = null;
+		try {
+			Statement statement = connection.createStatement();
+			
+			//班级，上课地点，上课时间，教师，人数上限，已选人数
+			String sql = "select classno,classroom,coursetime,TeacherInfo.name,maxelec,numofelec " + 
+						 "from CourseInfo,TeacherInfo " + 
+						 "where CourseInfo.teacherno = TeacherInfo.teacherno and courseno = '" + courseno + "' and schoolyear = '" + schoolyear + "' and schoolterm = '" + schoolterm + "' " +
+						 "group by classno";
+			resultset = statement.executeQuery(sql);
+			
+			/*try {
+			while(resultset.next())
+				System.out.println(resultset.getString(1) + resultset.getString(2) + resultset.getString("name"));
+			} catch (SQLException e) {
+				
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}*/
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return resultset;
 	}
 
 	@Override
@@ -482,8 +496,11 @@ public class Total implements LogicControl {
 		Total t = new Total();
 		String id = "101220036";
 		String pwd = "101220036";
-		t.login(id,pwd);
-		t.displayCourseInfo(id, "专业课", "2012-2013", "2");
+		//t.login(id,pwd);
+		
+		
+		
+		//t.getChosenCourseInfo("220020", "2012-2013", "2");
 		//ResultSet r = t.getBasicInfo(id);
 		//ResultSet r = t.getNaturalInfo(id);
 		//t.alterNaturalInfo(id,"houbojian","jiangsu","","","","",null);
