@@ -2,6 +2,11 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ page import="java.sql.*" %>
 
+<%
+application.setAttribute("currentYear", "2013");
+application.setAttribute("currentTerm", "2");
+%>
+
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

@@ -30,17 +30,13 @@
 					</tr>
 					<tr height="5"><td> </td></tr>
 					<%
-					int currentYear = 2013, currentTerm = 1;
-					int year = 2010;
-					for (int i = currentYear; i > year; i--) {
-						if (i == currentYear) {
-							if (currentTerm == 2)
-								out.println("<tr align=\"center\" height=\"22\"><td><a href=\"student/scoreQuery/test.jsp\"/>" + (i-1) + "-" + i + "学年" + "第二学期</a></td></tr>");
-							out.println("<tr align=\"center\" height=\"22\"><td><a href=\"student/scoreQuery/test.jsp\"/>" + (i-1) + "-" + i + "学年" + "第一学期</a></td></tr>");
-						} else {
-							out.println("<tr align=\"center\" height=\"22\"><td><a href=\"student/scoreQuery/test.jsp\"/>" + (i-1) + "-" + i + "学年" + "第二学期</a></td></tr>");
-							out.println("<tr align=\"center\" height=\"22\"><td><a href=\"student/scoreQuery/test.jsp\"/>" + (i-1) + "-" + i + "学年" + "第一学期</a></td></tr>");
-						}
+					int currentYear = Integer.parseInt((String) application.getAttribute("currentYear"));
+					int currentTerm = Integer.parseInt((String) application.getAttribute("currentTerm"));
+					int admissionTime = 2010;
+					for (int i = currentYear; i > admissionTime; i--) {
+						if (i != currentYear ||  currentTerm == 2)
+							out.println("<tr align=\"center\" height=\"22\"><td><a href=\"student/scoreQuery/score.jsp?year=" + i + "&term=" + 2 + "\"/>" + (i-1) + "-" + i + "学年" + "第二学期</a></td></tr>");
+						out.println("<tr align=\"center\" height=\"22\"><td><a href=\"student/scoreQuery/score.jsp?year=" + i + "&term=" + 1 + "\"/>" + (i-1) + "-" + i + "学年" + "第一学期</a></td></tr>");
 					}
 					%>
 				</table>
@@ -63,6 +59,34 @@
 					<th align="center">学分</th>
 					<th align="center">成绩</th>
 				</tr>
+
+				<%
+				String username = (String) session.getAttribute("username");
+				String yearString = request.getParameter("year");
+				String termString = request.getParameter("term");
+				int year, term;
+				if (yearString == null) {
+					year = currentYear;
+					term = currentTerm;
+				} else {
+					year = Integer.parseInt(yearString);
+					term = Integer.parseInt(termString);
+				}
+				
+				int index = 0;
+				ResultSet resultset = total.getGradeInfo(username, (year-1) + "-" + year, String.valueOf(term));
+				while (resultset.next()) {
+					out.println("<tr class=\"TABLE_TD_0" + (++index % 2 + 1) + "\">");
+					out.println("<td align=\"center\">" + index + "</td>");
+					out.println("<td align=\"center\">" + resultset.getString("courseno") + "</td>");
+					out.println("<td align=\"center\">" + resultset.getString("coursename") + "</td>");
+					out.println("<td align=\"center\">" + resultset.getString("ename") + "</td>");
+					out.println("<td align=\"center\">" + resultset.getString("coursetype") + "</td>");
+					out.println("<td align=\"center\">" + resultset.getInt("credit") + "</td>");
+					out.println("<td align=\"center\">" + resultset.getInt("score") + "</td>");
+					out.println("</tr>");
+				}
+				%>
 			</table>
 		</td>
 	</table>
