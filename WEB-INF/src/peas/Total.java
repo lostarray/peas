@@ -373,7 +373,7 @@ public class Total implements LogicControl {
 	}
 
 	@Override
-	public int creditStatistics(String username, String schoolyear, String schoolterm, String coursetype) {
+	public int creditStatistics(String username, String coursetype) {
 		// TODO Auto-generated method stub
 		ResultSet resultset = null;
 		int credit = 0;
@@ -383,7 +383,7 @@ public class Total implements LogicControl {
 			String sql = "select distinct CourseInfo.courseno,CourseInfo.credit " + 
 						 "from CourseInfo,CourseSelection " + 
 						 "where CourseInfo.courseno = CourseSelection.courseno and CourseInfo.schoolyear = CourseSelection.schoolyear and CourseInfo.schoolterm = CourseSelection.schoolterm and " + 
-						 "CourseSelection.stuno = '" + username + "' and CourseSelection.schoolyear = '" + schoolyear + "' and CourseSelection.schoolterm = '" + schoolterm + "' and CourseInfo.coursetype = '" + coursetype + "'";
+						 "CourseSelection.stuno = '" + username + "' and CourseInfo.coursetype = '" + coursetype + "'";
 			resultset = statement.executeQuery(sql);
 			
 			while (resultset.next()) {
@@ -396,6 +396,7 @@ public class Total implements LogicControl {
 		
 		return credit;
 	}
+
 
 
 	@Override

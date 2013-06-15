@@ -16,7 +16,7 @@ public interface LogicControl {
 	ResultSet getChosenCourseInfo(String courseno, String schoolyear, String schoolterm);//获取当前选课信息
 	boolean withdrawCourse (String stuno, String courseno, String schoolyear, String schoolterm, int classno);//退选
 	ResultSet getGradeInfo(String username, String schoolyear, String schoolterm);//成绩查看
-	int creditStatistics(String username, String schoolyear, String schoolterm, String coursetype);//统计学分
+	int creditStatistics(String username, String coursetype);//统计学分
 
 	/*******************教务员视角***********************/
 	ResultSet searchStudentno(String stuno, String username);//通过学号查询学生信息，username是为了确认院系信息
