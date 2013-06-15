@@ -1,3 +1,4 @@
+
 package peas;
 import java.sql.*;
 
@@ -564,4 +565,3 @@ public class Total implements LogicControl {
 	}
 	
 }
-
