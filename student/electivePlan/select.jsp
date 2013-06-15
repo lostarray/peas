@@ -29,6 +29,18 @@ if (classkind == null)
 	classkind = "专业课";
 else
 	classkind = new String(classkind.getBytes("ISO-8859-1"), "UTF-8");
+
+String courseno = request.getParameter("courseno");
+String classno = request.getParameter("classno");
+if (classno != null) {
+	boolean chooseSuccess = total.chooseCourse(courseno, username, schoolyear, schoolterm, 0, "", Integer.parseInt(classno));
+	if (chooseSuccess) %>
+		<script>alert("选课成功");</script>
+<%
+	else %>
+		<script>alert("选课失败");</script>
+<%
+}
 %>
 
 <div id="Function">
@@ -74,7 +86,7 @@ else
 					out.println("<td align=\"center\">" + resultset.getString("property") + "</td>");
 					out.println("<td align=\"center\">" + resultset.getString("speciality") + "</td>");
 					out.println("<td align=\"center\">" + resultset.getString("schoolarea") + "</td>");
-					out.println("<td align=\"center\"><a href=\"student/electivePlan/select.jsp?classkind=" + classkind + "&courseno=" + resultset.getString("courseno") + "\">" + (total.isSelected(username, resultset.getString("courseno"), schoolyear, schoolterm) ? "已选" : "未选") + "</a>" + "</td>");
+					out.println("<td align=\"center\"><a href=\"student/electivePlan/select.jsp?classkind=" + classkind + "&courseno=" + resultset.getString("courseno") + "\">" + (total.isSelected(username, resultset.getString("courseno"), schoolyear, schoolterm) > 0 ? "已选" : "未选") + "</a>" + "</td>");
 					out.println("</tr>");
 				}
 				%>
@@ -83,7 +95,6 @@ else
 
 		<td width="45%" valign="top">
 			<%
-			String courseno = request.getParameter("courseno");
 			if (courseno != null) {
 			%>
 				<table id="tbCourseList" width="80%" bordercolor="#777777" border="1" style="border-collapse:collapse">
@@ -99,6 +110,7 @@ else
 
 					<%
 					int index2 = 0;
+					int selected = total.isSelected(username, courseno, schoolyear, schoolterm);
 					boolean allowSubmit = true;
 					ResultSet resultset2 = total.getChosenCourseInfo(courseno, schoolyear, schoolterm);
 					while (resultset2.next()) {
@@ -108,7 +120,7 @@ else
 						out.println("<td align=\"center\">" + resultset2.getString("coursetime") + "</td>");
 						out.println("<td align=\"center\">" + resultset2.getString("TeacherInfo.name") + "</td>");
 						out.println("<td align=\"center\">" + resultset2.getInt("numofelec") + "/" + resultset2.getInt("maxelec") + "</td>");
-						if (total.isSelected(username, courseno, schoolyear, schoolterm) || (resultset2.getInt("numofelec") >= resultset2.getInt("maxelec"))) {
+						if (selected > 0 || (resultset2.getInt("numofelec") >= resultset2.getInt("maxelec"))) {
 							out.println("<td align=\"center\"><input type=\"radio\" name=\"classno\" value=\"" + resultset2.getInt("classno") + "\" disabled=\"disabled\" /></td>");
 							allowSubmit = false;
 						} else {
@@ -123,6 +135,13 @@ else
 						out.println("<input type=\"submit\" value=\"提交\" disabled=\"disabled\" />");
 					out.println("</td>");
 					%>
+					<script>
+						var obj = document.getElementsByName("classno");
+						for(i = 0; i < obj.length; i++) {
+							if(obj[i].value == <%=selected%>)
+								obj[i].checked = true;
+						}
+					</script>
 				</table>
 			<% } %>
 		</td>
