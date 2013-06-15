@@ -10,7 +10,7 @@ public class CourseInfo {
 	private int startweek;//上课开始星期
 	private int endweek;//上课结束星期
 	private int numofelec;//已选人数
-	private int numoflimit;//人数上限
+	private int maxelec;//人数上限
 	private int weekno;//上课周数
 	private String grade;//上课年级
 	private int isodd;//0 单双周 1单周 2双周
@@ -26,7 +26,8 @@ public class CourseInfo {
 	private String property;		//性质
 	private String coursename;		//课程名
 	private String ename;			//英文名
-	
+	private String schoolyear;
+	private String schoolterm;	
 	
 	public CourseInfo() { //默认构造函数
 
