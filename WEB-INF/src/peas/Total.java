@@ -210,9 +210,9 @@ public class Total implements LogicControl {
 			resultset = statement.executeQuery(sql);
 			
 			if (resultset.next()) {
-				return false;
+				return true;
 			}
-			return true;
+			return false;
 			
 			
 		} catch (SQLException e) {
@@ -223,6 +223,7 @@ public class Total implements LogicControl {
 		}
 		//return true;
 	}
+
 	
 	@Override
 	public ResultSet displayCourseInfo(String username, String classkind, String schoolyear, String schoolterm) {
@@ -249,6 +250,15 @@ public class Total implements LogicControl {
 			resultset = statement.executeQuery(sql);
 			
 			
+			/*try {
+				while(resultset.next())
+					System.out.println(resultset.getString(1) + resultset.getString(2) + resultset.getString(3) + resultset.getString(5));
+				} catch (SQLException e) {
+					
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}*/
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -256,6 +266,7 @@ public class Total implements LogicControl {
 		return resultset;
 		
 	}
+
 
 	@Override
 	public ResultSet getChosenCourseInfo(String courseno, String schoolyear, String schoolterm) {
@@ -272,19 +283,21 @@ public class Total implements LogicControl {
 			resultset = statement.executeQuery(sql);
 			
 			/*try {
-			while(resultset.next())
-				System.out.println(resultset.getString(1) + resultset.getString(2) + resultset.getString("name"));
-			} catch (SQLException e) {
-				
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}*/
+				while(resultset.next())
+					System.out.println(resultset.getString(1) + resultset.getString(2) + resultset.getString(3) + resultset.getString(4));
+				} catch (SQLException e) {
+					
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}*/
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return resultset;
 	}
+
 
 	@Override
 	public boolean chooseCourse(String courseno, String stuno, String schoolyear, String schoolterm, int score, String remark, int classno) {
@@ -311,10 +324,30 @@ public class Total implements LogicControl {
 	}
 
 	@Override
-	public boolean withdrawCourse(String courseno, String classno) {
+	public boolean withdrawCourse(String stuno, String courseno, String schoolyear, String schoolterm, int classno) {
 		// TODO Auto-generated method stub
-		return false;
+		try {
+			Statement statement = connection.createStatement();
+			
+			String sql = "delete " +
+						 "from CourseSelection " +
+						 "where stuno = '" + stuno + "' and courseno = '" + courseno + "' and schoolyear = '" + schoolyear + "' and schoolterm = '" + schoolterm + "'";
+			statement.executeUpdate(sql);
+			
+			sql = "update CourseInfo " + 
+				  "set numofelec = numofelec - 1 " +
+				  "where courseno = '" + courseno + "' and classno = '" + classno + "' and schoolyear = '" + schoolyear + "' and schoolterm = '" + schoolterm + "'"; 
+			statement.executeUpdate(sql);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("draw fail!");
+			return false;
+			//e.printStackTrace();
+		}
+		return true;
 	}
+
 
 	@Override
 	public ResultSet getGradeInfo(String username, String schoolyear, String schoolterm) {
@@ -340,10 +373,30 @@ public class Total implements LogicControl {
 	}
 
 	@Override
-	public int creditStatistics(String username) {
+	public int creditStatistics(String username, String schoolyear, String schoolterm, String coursetype) {
 		// TODO Auto-generated method stub
-		return 0;
+		ResultSet resultset = null;
+		int credit = 0;
+		try {
+			Statement statement = connection.createStatement();
+			
+			String sql = "select distinct CourseInfo.courseno,CourseInfo.credit " + 
+						 "from CourseInfo,CourseSelection " + 
+						 "where CourseInfo.courseno = CourseSelection.courseno and CourseInfo.schoolyear = CourseSelection.schoolyear and CourseInfo.schoolterm = CourseSelection.schoolterm and " + 
+						 "CourseSelection.stuno = '" + username + "' and CourseSelection.schoolyear = '" + schoolyear + "' and CourseSelection.schoolterm = '" + schoolterm + "' and CourseInfo.coursetype = '" + coursetype + "'";
+			resultset = statement.executeQuery(sql);
+			
+			while (resultset.next()) {
+				credit += resultset.getInt(2);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return credit;
 	}
+
 
 	@Override
 	public ResultSet searchStudentno(String stuno, String username) {
