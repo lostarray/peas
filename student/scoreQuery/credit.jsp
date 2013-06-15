@@ -21,11 +21,9 @@
 	    <table width="95%" class="TABLE_BODY">
 			<tbody>
 			<tr class="TABLE_TH">
-				<th align="center">通修</th>
-				<th align="center">平台</th>
-				<th align="center">核心</th>
-				<th align="center">选修</th>
-				<th align="center">14学分课程</th>
+				<th align="center">专业课</th>
+				<th align="center">通识课</th>
+				<th align="center">公选课</th>
 			</tr>
 				
 			<tr class="TABLE_TR_02">				    					    
