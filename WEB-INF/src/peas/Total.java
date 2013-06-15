@@ -197,7 +197,7 @@ public class Total implements LogicControl {
 		return resultset;
 	}
 	
-	public boolean isSelected(String stuno, String courseno, String schoolyear, String schoolterm)
+	public int isSelected(String stuno, String courseno, String schoolyear, String schoolterm)
 	{
 		ResultSet resultset = null;
 		try {
@@ -210,16 +210,16 @@ public class Total implements LogicControl {
 			resultset = statement.executeQuery(sql);
 			
 			if (resultset.next()) {
-				return true;
+				return resultset.getInt("classno");
 			}
-			return false;
+			return 0;
 			
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			//e.printStackTrace();
 			System.out.println("search failure!");
-			return false;
+			return 0;
 		}
 		//return true;
 	}
@@ -298,6 +298,36 @@ public class Total implements LogicControl {
 		return resultset;
 	}
 
+	@Override
+	public ResultSet getMyCourseInfo(String stuno, String schoolyear, String schoolterm) {
+		// TODO Auto-generated method stub
+		ResultSet resultset = null;
+		try {
+			Statement statement = connection.createStatement();
+			
+			//班级，上课地点，上课时间，教师，人数上限，已选人数
+			String sql = "select CourseInfo.courseno,coursename,schoolarea,TeacherInfo.name,coursetime,startweek,endweek,classroom,property " + 
+						 "from CourseInfo,TeacherInfo,CourseSelection " + 
+						 "where CourseSelection.schoolyear = '" + schoolyear + "' and CourseSelection.schoolterm = '" + schoolterm + "' " +
+						 		"and CourseInfo.schoolyear = CourseSelection.schoolyear and CourseInfo.schoolterm = CourseSelection.schoolterm" +
+						 		" and CourseInfo.classno = CourseSelection.classno and CourseInfo.courseno = CourseSelection.courseno and CourseSelection.stuno = '" + stuno + "' and CourseInfo.teacherno = TeacherInfo.teacherno ";
+			resultset = statement.executeQuery(sql);
+			
+			/*try {
+				while(resultset.next())
+					System.out.println(resultset.getString(1) + resultset.getString(2) + resultset.getString(3) + resultset.getString(4));
+				} catch (SQLException e) {
+					
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}*/
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return resultset;
+	}
 
 	@Override
 	public boolean chooseCourse(String courseno, String stuno, String schoolyear, String schoolterm, int score, String remark, int classno) {
@@ -588,9 +618,10 @@ public class Total implements LogicControl {
 		String pwd = "101220036";
 		t.login(id,pwd);
 		//t.chooseCourse("220020", id, "2012-2013", "2", 93, "", 1);
-		ResultSet r = t.getGradeInfo(id, "2012-2013", "2");
+		//ResultSet r = t.getGradeInfo(id, "2012-2013", "2");
+		ResultSet r = t.getMyCourseInfo(id, "2012-2013", "2");
 		while(r.next())
-			System.out.println(r.getString(1) + r.getString(2) + r.getString(3) + r.getString(4) + r.getString(5) + r.getString(6));
+			System.out.println(r.getString(1) + r.getString(2) + r.getString(3) + r.getString(4) + r.getString(5) + r.getString(6) + r.getString(7) + r.getString(8) + r.getString(9));
 		System.out.println("test over");
 		//t.login(id,pwd);
 		
