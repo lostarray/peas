@@ -12,9 +12,9 @@ public interface LogicControl {
 	ResultSet getGraduateInfo(String username);//获取学生毕业信息
 	ResultSet displayCourseInfo(String username, String classkind);//显示选课信息
 	ResultSet getChosenCourseInfo(String courseno);//获取当前选课信息
-	boolean chooseCourse (String courseno, String classno);//选课
+	boolean chooseCourse (String courseno, String stuno, String schoolyear, String schoolterm, int grade, String remark, int classno);//选课
 	boolean withdrawCourse (String courseno, String classno);//退选
-	ResultSet getGradeInfo(String username, String term);//成绩查看
+	ResultSet getGradeInfo(String username, String schoolyear, String schoolterm);//成绩查看
 	int creditStatistics(String username);//统计学分
 
 	/*******************教务员视角***********************/

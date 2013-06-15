@@ -210,5 +210,17 @@ public class CourseInfo {
 	public void setMaxelec(int maxelec) {
 		this.maxelec = maxelec;
 	}
+	public String getSchoolyear() {
+		return schoolyear;
+	}
+	public void setSchoolyear(String schoolyear) {
+		this.schoolyear = schoolyear;
+	}
+	public String getSchoolterm() {
+		return schoolterm;
+	}
+	public void setSchoolterm(String schoolterm) {
+		this.schoolterm = schoolterm;
+	}
 
 }
