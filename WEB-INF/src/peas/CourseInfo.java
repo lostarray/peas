@@ -26,6 +26,7 @@ public class CourseInfo {
 	private String property;		//性质
 	private String coursename;		//课程名
 	private String ename;			//英文名
+	
 	private String schoolyear;
 	private String schoolterm;	
 	
@@ -120,6 +121,7 @@ public class CourseInfo {
 		return ename;
 	}
 	
+
 	public int getMaxelec() {
 		return maxelec;
 	}
