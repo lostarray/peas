@@ -26,10 +26,9 @@ public class CourseInfo {
 	private String property;		//性质
 	private String coursename;		//课程名
 	private String ename;			//英文名
-	//add new
-	private String schoolyear;      //课程开设学年
-	private String schoolterm;      //课程开设学期
 	
+	private String schoolyear;
+	private String schoolterm;	
 	
 	public CourseInfo() { //默认构造函数
 
@@ -127,6 +126,14 @@ public class CourseInfo {
 		return maxelec;
 	}
 	
+	public String getSchoolyear() {
+		return schoolyear;
+	}
+	
+	public String getSchoolterm() {
+		return schoolterm;
+	}
+	
 	public void setCoursetype(String coursetype) {
 		this.coursetype = coursetype;
 	}
@@ -209,6 +216,14 @@ public class CourseInfo {
 	
 	public void setMaxelec(int maxelec) {
 		this.maxelec = maxelec;
+	}
+	
+	public void setSchoolyear(String schoolyear) {
+		this.schoolyear = schoolyear;
+	}
+	
+	public void setSchoolterm(String schoolterm) {
+		this.schoolterm = schoolterm;
 	}
 
 }

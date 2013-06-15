@@ -53,7 +53,7 @@ public class Total implements LogicControl {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");// 加载Mysql数据驱动
 			
-			connection = DriverManager.getConnection("jdbc:mysql://114.212.134.238/pybdb", "admin", "pyb15");// 创建数据连接
+			connection = DriverManager.getConnection("jdbc:mysql://114.212.135.113/pybdb", "admin", "pyb15");// 创建数据连接
 			
 		} catch (Exception e) {
 			System.out.println("Fail to connect the db!!" + e.getMessage());
@@ -96,6 +96,7 @@ public class Total implements LogicControl {
 			e.printStackTrace();
 		}
 		
+		System.out.println("login!");
 		return resultset;
 		//return null;
 		
@@ -194,18 +195,79 @@ public class Total implements LogicControl {
 		}
 		return resultset;
 	}
-
+	
+	public boolean isSelected(String stuno, String courseno, String schoolyear, String schoolterm)
+	{
+		ResultSet resultset = null;
+		try {
+			Statement statement = connection.createStatement();
+			
+			//学号，姓名，性别，导师，毕业日期，证书编号
+			String sql = "select * " + 
+						 "from CourseSelection " + 
+						 "where stuno = '" + stuno + "' and courseno = '" + courseno + "' and schoolyear = '" + schoolyear + "' and schoolterm = '" + schoolterm + "'";
+			resultset = statement.executeQuery(sql);
+			
+			if (resultset.next()) {
+				return false;
+			}
+			return true;
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+			System.out.println("search failure!");
+			return false;
+		}
+		//return true;
+	}
+	
 	@Override
-	public ResultSet displayCourseInfo(String username, String classkind) {
+	public ResultSet displayCourseInfo(String username, String classkind, String schoolyear, String schoolterm) {
 		// TODO Auto-generated method stub
+		ResultSet resultset = null;
+		try {
+			Statement statement = connection.createStatement();
+			String speciality = null,grade = null;
+			
+			String sql = "select speciality,admissiontime " + 
+						 "from StudentInfo,MajorInfo " + 
+						 "where StudentInfo.specialityno = MajorInfo.specialityno and stuno = '" + username + "'";
+			
+			resultset = statement.executeQuery(sql);
+			while(resultset.next()) {
+				speciality = resultset.getString(1);
+				grade = resultset.getString(2);
+			}
+			
+			//课程号，课程名，学分，学时，类型，性质，专业，校区
+			sql = "select distinct courseno,coursename,credit,classhour,coursetype,property,speciality,schoolarea " + 
+				  "from CourseInfo " + 
+				  "where speciality = '" + speciality + "' and coursetype = '" + classkind + "' and schoolyear = '" + schoolyear + "' and schoolterm = '" + schoolterm + "' and (grade = '" + grade + "' or grade = '-1')";
+			resultset = statement.executeQuery(sql);
+			
+			try {
+			while(resultset.next())
+				System.out.println(resultset.getString(1) + resultset.getString(2) + resultset.getString("coursetype"));
+			} catch (SQLException e) {
+				
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return resultset;
 		
-		
-		return null;
 	}
 
 	@Override
 	public ResultSet getChosenCourseInfo(String courseno) {
 		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
@@ -421,11 +483,13 @@ public class Total implements LogicControl {
 		String id = "101220036";
 		String pwd = "101220036";
 		t.login(id,pwd);
+		t.displayCourseInfo(id, "专业课", "2012-2013", "2");
 		//ResultSet r = t.getBasicInfo(id);
 		//ResultSet r = t.getNaturalInfo(id);
-		//t.alterNaturalInfo(id,"houbojian","jiangsu","","","","","210");
+		//t.alterNaturalInfo(id,"houbojian","jiangsu","","","","",null);
 		/*if (r==null) {
 			System.out.println("null\n");
+		}
 		else
 		{
 			System.out.println("not null\n");
@@ -438,8 +502,7 @@ public class Total implements LogicControl {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}*/
-			}
-	
+		
 	}
 
-
+}
