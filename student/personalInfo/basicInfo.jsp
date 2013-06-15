@@ -41,7 +41,7 @@
 			<td class="TABLE_TD_02">所在专业</td>
 			<td class="TABLE_TD_01"><%=resultset.getString("speciality")%></td>
 			<td class="TABLE_TD_02">入学时间</td>
-			<td class="TABLE_TD_01"><%=resultset.getString("admissiontime").substring(0, 10)%></td>
+			<td class="TABLE_TD_01"><%=resultset.getString("admissiontime")%></td>
 			<td class="TABLE_TD_02">导师</td>
 			<td class="TABLE_TD_01"><%=resultset.getString("TeacherInfo.name")%></td>
 		</tr>

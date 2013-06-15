@@ -40,8 +40,8 @@
 		<tr height="27">
 			<td class="TABLE_TD_02">导师</td>
 			<td class="TABLE_TD_01"><%=resultset.getString("TeacherInfo.name")%></td>
-			<td class="TABLE_TD_02">毕业日期</td>
-			<td class="TABLE_TD_01"><%=resultset.getString("graduatedate").substring(0, 10)%></td>
+			<td class="TABLE_TD_02">毕业时间</td>
+			<td class="TABLE_TD_01"><%=resultset.getString("graduatedate")%></td>
 			<td class="TABLE_TD_02">证书编号</td>
 			<td class="TABLE_TD_01"><%=resultset.getString("certificate_no")%></td>
 		</tr>
