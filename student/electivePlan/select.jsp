@@ -19,6 +19,12 @@
 <body>
 <jsp:include page="../header.jsp" />
 
+<script>
+	function enableSubmit() {
+		document.getElementsByName("chooseSubmit")[0].removeAttribute("disabled");
+	}
+</script>
+
 <%
 String username = (String) session.getAttribute("username");
 String classkind = request.getParameter("classkind");
@@ -43,8 +49,8 @@ if (classno != null) {
 }
 %>
 
-<div id="Function">
-	<form action="student/electivePlan/select.jsp" method="post" style="font-size:14px">
+<div id="Function" style="font-size:14px">
+	<form action="student/electivePlan/select.jsp" method="post">
 		<label for="">课程类型: </label>
 		<select style="vertical-align:middle;" name="classkind">
 			<option value="专业课">专业课</option>
@@ -56,6 +62,7 @@ if (classno != null) {
 		</script>
 		<input type="submit" value="查询" />
 		<br /><br />
+	</form>
 
 		<table width="100%">
 		<tr>
@@ -97,6 +104,7 @@ if (classno != null) {
 			<%
 			if (courseno != null) {
 			%>
+			<form action="student/electivePlan/select.jsp" method="post">
 				<table id="tbCourseList" width="80%" bordercolor="#777777" border="1" style="border-collapse:collapse">
 					<tr class="TABLE_TH">
 						<th align="center">班级</th>
@@ -124,30 +132,36 @@ if (classno != null) {
 							out.println("<td align=\"center\"><input type=\"radio\" name=\"classno\" value=\"" + resultset2.getInt("classno") + "\" disabled=\"disabled\" /></td>");
 							allowSubmit = false;
 						} else {
-							out.println("<td align=\"center\"><input type=\"radio\" name=\"classno\" value=\"" + resultset2.getInt("classno") + "\" /></td>");
+							out.println("<td align=\"center\"><input type=\"radio\" onclick=\"enableSubmit()\" name=\"classno\" value=\"" + resultset2.getInt("classno") + "\" /></td>");
 						}
 						out.println("</tr>");
 					}
 					out.println("<td align=\"center\" colspan=\"6\">");
 					if (allowSubmit)
-						out.println("<input type=\"submit\" value=\"提交\" />");
+						out.println("<input type=\"submit\" name=\"chooseSubmit\" value=\"提交\" />");
 					else
-						out.println("<input type=\"submit\" value=\"提交\" disabled=\"disabled\" />");
+						out.println("<input type=\"submit\" name=\"chooseSubmit\" value=\"提交\" disabled=\"disabled\" />");
 					out.println("</td>");
 					%>
 					<script>
 						var obj = document.getElementsByName("classno");
+						var allowSubmit = false;
 						for(i = 0; i < obj.length; i++) {
-							if(obj[i].value == <%=selected%>)
+							if(obj[i].value == <%=selected%>) {
 								obj[i].checked = true;
+								allowSubmit = true;
+							}
+						}
+						if (!allowSubmit) {
+							document.getElementsByName("chooseSubmit")[0].setAttribute("disabled", "disabled");
 						}
 					</script>
 				</table>
+			</form>
 			<% } %>
 		</td>
 		</tr>
 		</table>
-	</form>
 </div>
 
 <div class="Line"></div>
