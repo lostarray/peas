@@ -4,8 +4,8 @@
 <%
 String name = (String) session.getAttribute("name");
 if (name == null) { %>
-	<jsp:forward page="/peas" /><%
-} %>
+	<script>location.href='index.jsp';</script>
+<%}%>
 
 <div id="Header">
 	<div id="Logo"><a href="student"><img src="image/Logo.png" alt="" border="0" /></a></div>
