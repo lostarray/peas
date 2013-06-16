@@ -57,7 +57,7 @@ application.setAttribute("currentTerm", "2");
 						<label style="color: red;font-size: 12px;">管理员登陆：</label>
 						<li>用户名与初始密码为admin。</li><br/>
 						<label style="color: red;font-size: 12px;">教师登录：</label>
-						<li>用户名与初始密码为院系编号，如001。</li><br/>
+						<li>用户名为教工号，如122012，初始密码为123456。</li><br/>
 						<label style="color: red;font-size: 12px;">学生登陆：</label>
 						<li>用户名为学号，初始密码为123456。</li><br/>
 					</ul>
