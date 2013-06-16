@@ -6,6 +6,7 @@ import java.sql.*;
 public interface LogicControl {
 	/********************学生视角***********************/
 	ResultSet login(String username, String password);//登陆
+	ResultSet getadmissiontime(String username);//获取入学时间
 	ResultSet getBasicInfo(String username);//获取学生基本信息
 	ResultSet getNaturalInfo(String username);//获取学生自然信息
 	boolean alterNaturalInfo(String stuno, String pinyin, String familyaddr, String stationname, String homephone, String phonenum, String email, String zip);//修改自然信息
