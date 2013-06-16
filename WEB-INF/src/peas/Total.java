@@ -339,11 +339,11 @@ public class Total implements LogicControl {
 					 	" values('" + courseno + "', '" + stuno + "', '" + schoolyear + "', '" + 
 					 	schoolterm + "', '" + score + "', '" + remark + "', '" + classno + "')";
 			statement.executeUpdate(sql);
-			String sql_1 = "update CourseInfo" +
+			/*String sql_1 = "update CourseInfo" +
 						" set numofelec = numofelec + 1" +
 						" where courseno = '" + courseno + "' and schoolyear = '" + schoolyear + 
 						 "' and schoolterm = '" + schoolterm + "' and classno = '" + classno + "'";
-			statement.executeUpdate(sql_1);
+			statement.executeUpdate(sql_1);*/
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -364,10 +364,10 @@ public class Total implements LogicControl {
 						 "where stuno = '" + stuno + "' and courseno = '" + courseno + "' and schoolyear = '" + schoolyear + "' and schoolterm = '" + schoolterm + "'";
 			statement.executeUpdate(sql);
 			
-			sql = "update CourseInfo " + 
+			/*sql = "update CourseInfo " + 
 				  "set numofelec = numofelec - 1 " +
 				  "where courseno = '" + courseno + "' and classno = '" + classno + "' and schoolyear = '" + schoolyear + "' and schoolterm = '" + schoolterm + "'"; 
-			statement.executeUpdate(sql);
+			statement.executeUpdate(sql);*/
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
