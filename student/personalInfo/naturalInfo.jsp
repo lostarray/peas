@@ -27,8 +27,7 @@
 	String modify = request.getParameter("modify");
 	boolean modified = false;
 	if (modify != null) {
-		total.alterNaturalInfo(username, request.getParameter("pinyin"), request.getParameter("familyaddr"), request.getParameter("stationname"), request.getParameter("homephone"), request.getParameter("phonenum"), request.getParameter("email"), request.getParameter("zip"));
-		modified = true;
+		modified = total.alterNaturalInfo(username, request.getParameter("pinyin"), request.getParameter("familyaddr"), request.getParameter("stationname"), request.getParameter("homephone"), request.getParameter("phonenum"), request.getParameter("email"), request.getParameter("zip"));
 	}
 
 	ResultSet resultset = total.getNaturalInfo(username);
@@ -77,7 +76,12 @@
 			<td class="TABLE_TD_01" colspan="6">
 				<center>
 					<input type="submit" value="修改" name="modify" />
-					<% if (modified)	out.println("<font color=\"#FF0000\">修改成功</font>"); %>
+					<%
+					if (modified)
+						out.println("<font color=\"#FF0000\">修改成功</font>");
+					else if (modify != null)
+						out.println("<font color=\"#FF0000\">修改失败</font>");
+					%>
 				</center>
 			</td>
 		</tr>
