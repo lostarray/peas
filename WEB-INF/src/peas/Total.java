@@ -104,6 +104,35 @@ public class Total implements LogicControl {
 	}
 
 	@Override
+	public ResultSet getadmissiontime(String username) {
+		// TODO Auto-generated method stub
+		//connection = getConnection();
+		ResultSet resultset = null;
+		try {
+			Statement statement = connection.createStatement();
+			
+			//学号，姓名，性别，专业代码，专业，出生年月，入学日期，导师，培养性质，攻读学位，学籍状态，国籍，身份证号，名族
+			String sql = "select admissiontime" + 
+						 " from StudentInfo" + 
+						 " where StudentInfo.stuno = '" + username + "'";
+			resultset = statement.executeQuery(sql);
+			
+			/*try {
+				while(resultset.next())
+					System.out.println(resultset.getString(1) + resultset.getString("mname") + resultset.getString("tname"));
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}*/
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return resultset;
+	}
+	
+	@Override
 	public ResultSet getBasicInfo(String username) {
 		// TODO Auto-generated method stub
 		//connection = getConnection();
@@ -410,14 +439,16 @@ public class Total implements LogicControl {
 		try {
 			Statement statement = connection.createStatement();
 			
-			String sql = "select distinct CourseInfo.courseno,CourseInfo.credit " + 
+			String sql = "select distinct CourseInfo.courseno,CourseInfo.credit,score " + 
 						 "from CourseInfo,CourseSelection " + 
 						 "where CourseInfo.courseno = CourseSelection.courseno and CourseInfo.schoolyear = CourseSelection.schoolyear and CourseInfo.schoolterm = CourseSelection.schoolterm and " + 
 						 "CourseSelection.stuno = '" + username + "' and CourseInfo.coursetype = '" + coursetype + "'";
 			resultset = statement.executeQuery(sql);
 			
 			while (resultset.next()) {
-				credit += resultset.getInt(2);
+				if (resultset.getInt(3) >= 0) {
+					credit += resultset.getInt(2);
+				}
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
