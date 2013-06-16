@@ -446,7 +446,7 @@ public class Total implements LogicControl {
 			resultset = statement.executeQuery(sql);
 			
 			while (resultset.next()) {
-				if (resultset.getInt(3) >= 0) {
+				if (resultset.getInt(3) >= 60) {
 					credit += resultset.getInt(2);
 				}
 			}
