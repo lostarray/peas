@@ -528,9 +528,36 @@ public class Total implements LogicControl {
 	}
 
 	@Override
-	public ResultSet filterStudent(StudentInfo stuInfo, String username) {
+	public ResultSet filterStudent(String nationality, String culturednature, String admissiontime, String gender, int schoolrollstate, String master_doctor, String teacherno, String username) {
 		// TODO Auto-generated method stub
-		return null;
+		Statement statement;
+		ResultSet resultset = null;
+		try {
+			statement = connection.createStatement();
+			
+			String specialityno = null;
+			
+			//课程编号、课程内容、课程英文名、课程类型、学分、成绩
+			String sql = "select specialityno " +
+						 "from AcdemicInfo " +
+						 "where acdemicno = '" + username + "'"; 
+			resultset = statement.executeQuery(sql);
+			
+			while(resultset.next())
+			{
+				specialityno = resultset.getString(1);
+			}
+			sql = "select stuname, stuno, StudentInfo.gender, culturednature, birthdate, speciality, TeacherInfo.name, schoolrollstate " + 
+			             "from StudentInfo LEFT JOIN TeacherInfo ON StudentInfo.teacherno = TeacherInfo.teacherno LEFT JOIN MajorInfo ON StudentInfo.specialityno = MajorInfo.specialityno " +
+					     "where nationality = '" + nationality + "' and culturednature = '" + culturednature + "' and StudentInfo.specialityno = '" 
+			             + specialityno + "' and admissiontime = '" + admissiontime + "' and StudentInfo.gender = '" + gender + "' and schoolrollstate = '" + 
+			             schoolrollstate + "' and master_doctor = '" + master_doctor + "' and StudentInfo.teacherno = '" + teacherno + "'";
+			resultset = statement.executeQuery(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return resultset;
 	}
 
 	@Override
@@ -567,21 +594,85 @@ public class Total implements LogicControl {
 	}
 
 	@Override
-	public ResultSet teacherAdd(TeacherInfo TeaInfo) {
+	public boolean teacherAdd(String username,String teacherno,String name,String ename,String gender,String title,String remark) {
 		// TODO Auto-generated method stub
-		return null;
+		ResultSet resultset = null;
+		try {
+			Statement statement = connection.createStatement();
+			String specialityno = null;
+			
+			String sql = "select specialityno " +
+						 "from AcdemicInfo " +
+						 "where acdemicno = '" + username + "'"; 
+			resultset = statement.executeQuery(sql);
+			
+			while(resultset.next()) {
+				specialityno = resultset.getString(1);
+			}
+			
+			sql = "insert " +
+				  "into TeacherInfo (teacherno,name,ename,gender,specialityno,title,remark) " +
+				  "values ('" + teacherno + "', '" + name + "', '" + ename + "', '" +  gender + "', '" + specialityno + "', '" + title + "', '" + remark + "')";
+			statement.executeUpdate(sql);
+			return true;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+			return false;
+		}
+		
 	}
 
 	@Override
-	public ResultSet teacherAlter(TeacherInfo TeaInfo) {
+	public boolean teacherAlter(String teacherno,String ename,String title,String remark) {
 		// TODO Auto-generated method stub
-		return null;
+		//ResultSet resultset = null;
+		try {
+			Statement statement = connection.createStatement();
+			
+			String sql = "update TeacherInfo " +
+					 	 "set ename = '" + ename + "',title = '" + title + "', remark = '" + remark + "' " +
+					 	 "where teacherno = '" + teacherno + "'";
+			statement.executeUpdate(sql);
+			return true;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+			return false;
+		}
 	}
 
 	@Override
 	public boolean teacherDelete(String teacherno) {
 		// TODO Auto-generated method stub
-		return false;
+		ResultSet resultset = null;
+		try {
+			Statement statement = connection.createStatement();
+			
+			String sql = "select * " +
+						 "from StudentInfo " +
+						 "where teacherno = '" + teacherno + "'";
+			resultset = statement.executeQuery(sql);
+			
+			if (resultset.next())
+			{
+				//System.out.println("fail!");
+				return false;
+			}
+			
+			sql = "delete " +
+				  "from TeacherInfo " +
+				  "where teacherno = '" + teacherno + "'";
+			statement.executeUpdate(sql);
+			return true;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+			return false;
+		}
 	}
 
 	@Override
