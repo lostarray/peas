@@ -32,7 +32,14 @@
 					<%
 					int currentYear = Integer.parseInt((String) application.getAttribute("currentYear"));
 					int currentTerm = Integer.parseInt((String) application.getAttribute("currentTerm"));
+					if (currentTerm == 2) {
+						currentTerm = 1;
+					} else {
+						currentYear --;
+						currentTerm = 2;
+					}
 					int admissionTime = 2010;
+					
 					for (int i = currentYear; i > admissionTime; i--) {
 						if (i != currentYear ||  currentTerm == 2)
 							out.println("<tr align=\"center\" height=\"22\"><td><a href=\"student/scoreQuery/score.jsp?year=" + i + "&term=" + 2 + "\"/>" + (i-1) + "-" + i + "学年" + "第二学期</a></td></tr>");
