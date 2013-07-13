@@ -514,7 +514,7 @@ public class Total implements LogicControl {
 			}
 			
 			//学号，姓名，性别，专业，出生日期，入学时间，导师，培养性质，硕士/博士，学籍状态
-			sql = "select stuno,stuname,StudentInfo.gender,MajorInfo.specialityno,birthdate,admissiontime,TeacherInfo.name,culturednature,master_doctor,schoolrollstate " +
+			sql = "select stuno,stuname,StudentInfo.gender,MajorInfo.speciality,birthdate,admissiontime,TeacherInfo.name,culturednature,master_doctor,schoolrollstate " +
 				  "from StudentInfo LEFT JOIN TeacherInfo ON StudentInfo.teacherno = TeacherInfo.teacherno LEFT JOIN MajorInfo ON StudentInfo.specialityno = MajorInfo.specialityno " +
 				  "where stuname = '" + stuname + "' and StudentInfo.specialityno = '" + specialityno + "'";
 			resultset = statement.executeQuery(sql);

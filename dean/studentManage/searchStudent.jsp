@@ -46,7 +46,6 @@ if (searchMethod == null)
 				<td align="center">学号</td>
 				<td align="center">姓名</td>
 				<td align="center">性别</td>
-				<td align="center">学院</td>
 				<td align="center">专业</td>
 				<td align="center">出生日期</td>
 				<td align="center">入学时间</td>
@@ -68,7 +67,19 @@ if (searchMethod == null)
 
 				int index = 0;
 				while (resultset.next()) {
-					
+					out.println("<tr class=\"TABLE_TD_0" + (++index % 2 + 1) + "\">");
+					out.println("<td align=\"center\">" + resultset.getString("stuno") + "</td>");
+					out.println("<td align=\"center\">" + resultset.getString("stuname") + "</td>");
+					out.println("<td align=\"center\">" + resultset.getString("gender") + "</td>");
+					out.println("<td align=\"center\">" + resultset.getString("MajorInfo.speciality") + "</td>");
+					out.println("<td align=\"center\">" + resultset.getString("birthdate") + "</td>");
+					out.println("<td align=\"center\">" + resultset.getString("admissiontime") + "</td>");
+					out.println("<td align=\"center\">" + resultset.getString("TeacherInfo.name") + "</td>");
+					out.println("<td align=\"center\">" + resultset.getString("culturednature") + "</td>");
+					out.println("<td align=\"center\">" + resultset.getString("master_doctor") + "</td>");
+					out.println("<td align=\"center\">" + resultset.getString("schoolrollstate") + "</td>");
+					out.println("<td align=\"center\">" + "<a href=\"dean/studentManage/studentDetail.jsp?stuno=" + resultset.getString("stuno") + "\">详细信息</a>" + "</td>");
+					out.println("</tr>");
 				}
 			}
 			%>
