@@ -29,7 +29,7 @@ if (searchMethod == null)
 
 <div id="Function">
 	<form action="dean/studentManage/searchStudent.jsp" method="post">
-		<label for="">搜索方式: </label>
+		<label for="">查找方式: </label>
 		<select style="vertical-align:middle;" name="searchMethod">
 			<option value="stuname">姓名</option>
 			<option value="stuno">学号</option>
