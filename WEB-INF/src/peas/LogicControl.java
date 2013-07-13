@@ -24,7 +24,7 @@ public interface LogicControl {
 	ResultSet searchStudentno(String stuno, String username);//通过学号查询学生信息，username是为了确认院系信息
 	ResultSet searchStudentname(String stuname, String username);//通过姓名查询学生信息（可能会有重名，所以返回数组）
 	ResultSet filterStudent(StudentInfo stuInfo, String username);//通过输入学生信息来筛选学生信息
-	ResultSet [] teacherManage();//进入导师管理界面，输出导师信息
+	ResultSet teacherManage(String username);//进入导师管理界面，输出导师信息
 	ResultSet teacherAdd(TeacherInfo TeaInfo);//添加导师，返回操作结果
 	ResultSet teacherAlter(TeacherInfo TeaInfo);//修改导师，返回操作结果
 	boolean teacherDelete(String teacherno);//删除导师，返回操作结果

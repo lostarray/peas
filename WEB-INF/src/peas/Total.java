@@ -480,9 +480,9 @@ public class Total implements LogicControl {
 			}
 			
 			//学号，姓名，性别，专业，出生日期，入学时间，导师，培养性质，硕士/博士，学籍状态
-			sql = "select stuno,stuname,gender,MajorInfo.specialityno,birthdate,admissiontime,TeacherInfo.name,culturednature,master_doctor,schoolrollstate " +
+			sql = "select stuno,stuname,StudentInfo.gender,MajorInfo.speciality,birthdate,admissiontime,TeacherInfo.name,culturednature,master_doctor,schoolrollstate " +
 				  "from StudentInfo LEFT JOIN TeacherInfo ON StudentInfo.teacherno = TeacherInfo.teacherno LEFT JOIN MajorInfo ON StudentInfo.specialityno = MajorInfo.specialityno " +
-				  "where stuno = '" + stuno + "' and specialityno = '" + specialityno + "'";
+				  "where stuno = '" + stuno + "' and StudentInfo.specialityno = '" + specialityno + "'";
 			resultset = statement.executeQuery(sql);
 			
 			
@@ -514,9 +514,9 @@ public class Total implements LogicControl {
 			}
 			
 			//学号，姓名，性别，专业，出生日期，入学时间，导师，培养性质，硕士/博士，学籍状态
-			sql = "select stuno,stuname,gender,MajorInfo.specialityno,birthdate,admissiontime,TeacherInfo.name,culturednature,master_doctor,schoolrollstate " +
+			sql = "select stuno,stuname,StudentInfo.gender,MajorInfo.specialityno,birthdate,admissiontime,TeacherInfo.name,culturednature,master_doctor,schoolrollstate " +
 				  "from StudentInfo LEFT JOIN TeacherInfo ON StudentInfo.teacherno = TeacherInfo.teacherno LEFT JOIN MajorInfo ON StudentInfo.specialityno = MajorInfo.specialityno " +
-				  "where stuname = '" + stuname + "' and specialityno = '" + specialityno + "'";
+				  "where stuname = '" + stuname + "' and StudentInfo.specialityno = '" + specialityno + "'";
 			resultset = statement.executeQuery(sql);
 			
 			
@@ -534,9 +534,36 @@ public class Total implements LogicControl {
 	}
 
 	@Override
-	public ResultSet[] teacherManage() {
+	public ResultSet teacherManage(String username) {
 		// TODO Auto-generated method stub
-		return null;
+		ResultSet resultset = null;
+		try {
+			Statement statement = connection.createStatement();
+			String specialityno = null;
+			
+			//课程编号、课程内容、课程英文名、课程类型、学分、成绩
+			String sql = "select specialityno " +
+						 "from AcdemicInfo " +
+						 "where acdemicno = '" + username + "'"; 
+			resultset = statement.executeQuery(sql);
+			
+			while(resultset.next())
+			{
+				specialityno = resultset.getString(1);
+			}
+			
+			//导师序号，姓名，英文名，职称，备注
+			sql = "select teacherno,name,ename,title,remark " +
+				  "from TeacherInfo " +
+				  "where specialityno = '" + specialityno + "'";
+			resultset = statement.executeQuery(sql);
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return resultset;
 	}
 
 	@Override
