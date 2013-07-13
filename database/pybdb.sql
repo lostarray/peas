@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 07 月 13 日 09:36
+-- 生成日期: 2013 年 07 月 13 日 14:11
 -- 服务器版本: 5.5.31-MariaDB-log
 -- PHP 版本: 5.4.17
 
@@ -19,6 +19,28 @@ SET time_zone = "+00:00";
 --
 -- 数据库: `pybdb`
 --
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `AcdemicInfo`
+--
+
+CREATE TABLE IF NOT EXISTS `AcdemicInfo` (
+  `acdemicno` char(9) NOT NULL DEFAULT '',
+  `acdemicname` varchar(20) DEFAULT NULL,
+  `gender` char(2) DEFAULT NULL,
+  `specialityno` char(5) NOT NULL,
+  PRIMARY KEY (`acdemicno`),
+  KEY `specialityno` (`specialityno`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `AcdemicInfo`
+--
+
+INSERT INTO `AcdemicInfo` (`acdemicno`, `acdemicname`, `gender`, `specialityno`) VALUES
+('122011', 'houbodashen', '女', '12201');
 
 -- --------------------------------------------------------
 
@@ -261,6 +283,13 @@ INSERT INTO `UserInfo` (`id`, `password`, `role`) VALUES
 --
 -- 限制导出的表
 --
+
+--
+-- 限制表 `AcdemicInfo`
+--
+ALTER TABLE `AcdemicInfo`
+  ADD CONSTRAINT `AcdemicInfo_ibfk_1` FOREIGN KEY (`specialityno`) REFERENCES `MajorInfo` (`specialityno`),
+  ADD CONSTRAINT `AcdemicInfo_ibfk_2` FOREIGN KEY (`acdemicno`) REFERENCES `UserInfo` (`id`);
 
 --
 -- 限制表 `CourseInfo`
