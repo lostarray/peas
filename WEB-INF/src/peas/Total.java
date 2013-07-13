@@ -480,7 +480,7 @@ public class Total implements LogicControl {
 			}
 			
 			//学号，姓名，性别，专业，出生日期，入学时间，导师，培养性质，硕士/博士，学籍状态
-			sql = "select stuno,stuname，gender,MajorInfo。specialityno,birthdate,admissiontime,TeacherInfo.name,culturednature,master_doctor,schoolrollstate " +
+			sql = "select stuno,stuname,gender,MajorInfo.specialityno,birthdate,admissiontime,TeacherInfo.name,culturednature,master_doctor,schoolrollstate " +
 				  "from StudentInfo LEFT JOIN TeacherInfo ON StudentInfo.teacherno = TeacherInfo.teacherno LEFT JOIN MajorInfo ON StudentInfo.specialityno = MajorInfo.specialityno " +
 				  "where stuno = '" + stuno + "' and specialityno = '" + specialityno + "'";
 			resultset = statement.executeQuery(sql);
@@ -514,7 +514,7 @@ public class Total implements LogicControl {
 			}
 			
 			//学号，姓名，性别，专业，出生日期，入学时间，导师，培养性质，硕士/博士，学籍状态
-			sql = "select stuno,stuname，gender,MajorInfo。specialityno,birthdate,admissiontime,TeacherInfo.name,culturednature,master_doctor,schoolrollstate " +
+			sql = "select stuno,stuname,gender,MajorInfo.specialityno,birthdate,admissiontime,TeacherInfo.name,culturednature,master_doctor,schoolrollstate " +
 				  "from StudentInfo LEFT JOIN TeacherInfo ON StudentInfo.teacherno = TeacherInfo.teacherno LEFT JOIN MajorInfo ON StudentInfo.specialityno = MajorInfo.specialityno " +
 				  "where stuname = '" + stuname + "' and specialityno = '" + specialityno + "'";
 			resultset = statement.executeQuery(sql);
