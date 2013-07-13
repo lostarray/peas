@@ -705,22 +705,85 @@ public class Total implements LogicControl {
 	}
 
 	@Override
-	public ResultSet teacherAndstudent(int year, String degree) {
+	public ResultSet teacherAndstudent(String username, String year, String degree) {
 		// TODO Auto-generated method stub
-		return null;
+		ResultSet resultset = null;
+		try {
+			Statement statement = connection.createStatement();
+			String specialityno = null;
+			
+			String sql = "select specialityno " +
+						 "from AcdemicInfo " +
+						 "where acdemicno = '" + username + "'"; 
+			resultset = statement.executeQuery(sql);
+			
+			while(resultset.next())
+			{
+				specialityno = resultset.getString(1);
+				//System.out.println(specialityno);
+			}
+			
+			//学号，学生姓名，导师，导师备注
+			sql = "select stuno,stuname,TeacherInfo.name,TeacherInfo.remark " +
+				  "from StudentInfo LEFT JOIN TeacherInfo ON StudentInfo.teacherno = TeacherInfo.teacherno " +
+				  "where StudentInfo.specialityno = '" + specialityno + "' and admissiontime = '" + year + "' and master_doctor = '" + degree + "'";
+			resultset = statement.executeQuery(sql);
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return resultset;
 	}
 
 	@Override
-	public ResultSet optionalteacher(String stuno) {
+	public boolean optionalteacher(String stuno, String teacherno) {
 		// TODO Auto-generated method stub
-		return null;
+		ResultSet resultset = null;
+		try {
+			//如果老师序号不存在会返回false
+			Statement statement = connection.createStatement();
+			
+			String sql = "select * " +
+						 "from TeacherInfo " +
+						 "where teacherno = '" + teacherno + "'";
+			resultset = statement.executeQuery(sql);
+			
+			if (!resultset.next())
+				return false;
+			
+			sql = "update StudentInfo " +
+				  "set teacherno = '" + teacherno + "' " +
+				  "where stuno = '" + stuno + "'";
+		    statement.executeUpdate(sql);
+			return true;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+			return false;
+		}
+
 	}
 
 	@Override
-	public ResultSet beyondtimeManage(int year, String degree,
-			String nationality) {
+	public ResultSet beyondtimeManage(String year, String degree, String nationality) {
 		// TODO Auto-generated method stub
-		return null;
+		ResultSet resultset = null;
+		try {
+			Statement statement = connection.createStatement();
+			
+			String sql = "select stuname, stuno, TeacherInfo.gender, admissiontime, culturednature, birthdate, speciality, name, schoolrollstate " +
+						 "from StudentInfo LEFT JOIN TeacherInfo ON StudentInfo.teacherno = TeacherInfo.teacherno LEFT JOIN MajorInfo ON StudentInfo.specialityno = MajorInfo.specialityno " +
+						 "where admissiontime = '" + year + "' and master_doctor = '" + degree + "' and nationality = '" + nationality + "'";
+			resultset = statement.executeQuery(sql);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return resultset;
 	}
 
 	@Override
@@ -730,34 +793,146 @@ public class Total implements LogicControl {
 	}
 
 	@Override
-	public ResultSet graduateMange(int year, String degree, String stustate) {
+	public ResultSet graduateMange(String username, String year, String degree, int stustate) {
 		// TODO Auto-generated method stub
-		return null;
+		ResultSet resultset = null;
+		try {
+			Statement statement = connection.createStatement();
+			String specialityno = null;
+			
+			String sql = "select specialityno " +
+						 "from AcdemicInfo " +
+						 "where acdemicno = '" + username + "'"; 
+			resultset = statement.executeQuery(sql);
+			
+			while(resultset.next())
+			{
+				specialityno = resultset.getString(1);
+				//System.out.println(specialityno);
+			}
+			
+			//学号，学生姓名，性别，入学年份，培养性质，出生日期，专业，导师编号，导师，学籍状态，毕业证书编号，毕业时间
+			sql = "select stuno,stuname,StudentInfo.gender,admissiontime,culturednature,birthdate,StudentInfo.specialityno,MajorInfo.speciality,TeacherInfo.name,schoolrollstate,certificate_no,graduatedate " +
+				  "from StudentInfo LEFT JOIN TeacherInfo ON StudentInfo.teacherno = TeacherInfo.teacherno LEFT JOIN MajorInfo ON StudentInfo.specialityno = MajorInfo.specialityno " +
+				  "where admissiontime = '" + year + "' and master_doctor = '" + degree + "' and schoolrollstate = '" + stustate + "' and StudentInfo.specialityno = '" + specialityno + "'";
+			resultset = statement.executeQuery(sql);
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return resultset;
+
 	}
 
 	@Override
-	public ResultSet graduateStu(String stuno) {
+	public ResultSet graduateStu(String username, String stuno) {
 		// TODO Auto-generated method stub
-		return null;
+		ResultSet resultset = null;
+		try {
+			Statement statement = connection.createStatement();
+			String specialityno = null;
+			
+			String sql = "select specialityno " +
+						 "from AcdemicInfo " +
+						 "where acdemicno = '" + username + "'"; 
+			resultset = statement.executeQuery(sql);
+			
+			while(resultset.next())
+			{
+				specialityno = resultset.getString(1);
+				//System.out.println(specialityno);
+			}
+			
+			//学号，姓名，性别，导师，毕业日期，证书编号
+			sql = "select stuno,stuname,StudentInfo.gender,TeacherInfo.name,graduatedate,certificate_no" + 
+				  " from StudentInfo LEFT JOIN TeacherInfo ON StudentInfo.teacherno = TeacherInfo.teacherno " + 
+				  "where StudentInfo.stuno = '" + stuno + "' and StudentInfo.specialityno = '" + specialityno + "'";
+			resultset = statement.executeQuery(sql);
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return resultset;
 	}
 
 	@Override
-	public ResultSet altergraduateInfo(StudentInfo stuInfo) {
+	public boolean altergraduateInfo(String stuno, String certificate_no, String graduatedate, String teacherno, String name) {
 		// TODO Auto-generated method stub
-		return null;
+		ResultSet resultset = null;
+		try {
+			//如果老师序号和姓名不符合实际情况会返回false
+			Statement statement = connection.createStatement();
+			
+			String sql = "select * " +
+						 "from TeacherInfo " +
+						 "where teacherno = '" + teacherno + "' and name = '" +  name + "'";
+			resultset = statement.executeQuery(sql);
+			
+			if (!resultset.next()) {
+				System.out.println("fail!");
+				return false;
+			}
+				
+			
+			sql = "update StudentInfo " +
+				  "set teacherno = '" + teacherno + "',certificate_no = '" + certificate_no + "',graduatedate = '" + graduatedate + "' " +
+				  "where stuno = '" + stuno + "'";
+		    statement.executeUpdate(sql);
+			return true;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+			return false;
+		}
 	}
 
 	@Override
-	public ResultSet gradeInfo_stu(String stuno, String stuname) {
+	public ResultSet gradeInfo_stu(String stuno) {
 		// TODO Auto-generated method stub
-		return null;
+		ResultSet resultset = null;
+		try {
+			Statement statement = connection.createStatement();
+			
+			//课程编号、课程内容、课程英文名、课程类型、学分、成绩
+			String sql = "select CourseInfo.courseno, CourseInfo.coursename, CourseInfo.ename, CourseInfo.coursetype, CourseInfo.credit, CourseSelection.score" +
+						 " from CourseInfo, CourseSelection" +
+						 " where CourseInfo.courseno = CourseSelection.courseno" + " and CourseSelection.stuno = '" + stuno + "'";
+			resultset = statement.executeQuery(sql);
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return resultset;
 	}
 
 	@Override
-	public ResultSet gradeInfo_course(String courseno, int year, int term,
-			String teacherno) {
+	public ResultSet gradeInfo_course(String courseno, String year, String term, String teacherno) {
 		// TODO Auto-generated method stub
-		return null;
+		ResultSet resultset = null;
+		try {
+			Statement statement = connection.createStatement();
+			
+			//课程编号、课程内容、课程英文名、课程类型、学分、成绩
+			String sql = "select StudentInfo.stuno,stuname,score " +
+						 "from CourseInfo,CourseSelection,StudentInfo " +
+						 "where CourseInfo.courseno = CourseSelection.courseno and CourseInfo.schoolyear = CourseSelection.schoolyear and CourseInfo.schoolterm = CourseSelection.schoolterm " +
+						 "and CourseInfo.classno = CourseSelection.classno and CourseSelection.stuno = StudentInfo.stuno " +
+						 "and CourseInfo.courseno = '" + courseno + "' and CourseInfo.schoolyear = '" + year + "' and CourseInfo.schoolterm = '" + term + "' and CourseInfo.teacherno = '" + teacherno + "'";
+			resultset = statement.executeQuery(sql);
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return resultset;
 	}
 
 	@Override

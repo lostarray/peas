@@ -29,16 +29,16 @@ public interface LogicControl {
 	boolean teacherAdd(String username,String teacherno,String name,String ename,String gender,String title,String remark);//添加导师，返回操作结果
 	boolean teacherAlter(String teacherno,String ename,String title,String remark);//修改导师，返回操作结果
 	boolean teacherDelete(String teacherno);//删除导师，返回操作结果
-	ResultSet teacherAndstudent(int year, String degree);//师生互联
-	ResultSet optionalteacher(String stuno);//返回可选导师姓名列表
-	ResultSet beyondtimeManage(int year, String degree, String nationality);//超期管理进入查询界面
+	ResultSet teacherAndstudent(String username, String year, String degree);//师生互联
+	boolean optionalteacher(String stuno, String teacherno);//返回可选导师姓名列表
+	ResultSet beyondtimeManage(String year, String degree, String nationality);//超期管理进入查询界面
 	ResultSet stu_detail(String detail);//点击“详细信息”进入学生信息页面
 	//Fileset exporttoExcel(String export);//点击“导出为Excel”，将结果输出到Excel文件中
-	ResultSet graduateMange(int year, String degree, String stustate);//毕业信息管理，导出先不管
-	ResultSet graduateStu(String stuno);//按学号搜索学生毕业信息
-	ResultSet altergraduateInfo(StudentInfo stuInfo);//修改毕业学生信息
-	ResultSet gradeInfo_stu(String stuno, String stuname);//通过学生学号和姓名查询其成绩
-	ResultSet gradeInfo_course(String courseno, int year, int term, String teacherno);//通过课程信息查询本课程本学年本学期某位老师的课程的所有学生成绩
+	ResultSet graduateMange(String username, String year, String degree, int stustate);//毕业信息管理，导出先不管
+	ResultSet graduateStu(String username, String stuno);//按学号搜索学生毕业信息
+	boolean altergraduateInfo(String stuno, String certificate_no, String graduatedate, String teacherno, String name);//修改毕业学生信息
+	ResultSet gradeInfo_stu(String stuno);//通过学生学号和姓名查询其成绩
+	ResultSet gradeInfo_course(String courseno, String year, String term, String teacherno);//通过课程信息查询本课程本学年本学期某位老师的课程的所有学生成绩
 	ResultSet gradeForStu(int gradelow);//查询满足学分条件的学生的各类学分统计
 	ResultSet importGrade(int year, int term, int courseno, int classno);//弹出某课程在某学期某班级的全体学生成绩列表
 	ResultSet addGrade(int year, int term, int courseno, int classno, String stuno, String stuname, int grade);//根据当前课程信息以及学生成绩信息向数据库添加一条成绩信息
