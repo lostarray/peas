@@ -263,7 +263,7 @@ table.Achievement .TdContent {
 	border:solid;
 	border-color:#777777;
 	font-family:Tahoma;
-	font-size:12px;
+	font-size:14px;
 	border-width: 1px;
 	border-style: solid;
 	line-height: 150%;
@@ -329,6 +329,7 @@ table.Achievement .TdContent {
 {
 	background-color: #f2faf3;
 	font-style: normal;
+	font-size: 13px;
 	vertical-align: bottom;
 	text-align: left;
 	word-break: keep-all;/*强制不换行*/
@@ -338,6 +339,7 @@ table.Achievement .TdContent {
 {
 	background-color: #ddf0fb;
 	font-style: normal;
+	font-size: 13px;
 	vertical-align: bottom;
 	text-align: left;
 	word-break: keep-all;/*强制不换行*/

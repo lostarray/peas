@@ -20,7 +20,7 @@
 	<ul>
 		<li><a href="dean/studentManage/searchStudent.jsp"><img src="image/common/3.png" alt="" /><br />学生查询</a></li>
 		<li><a href=""><img src="" alt="" /><br />学生统计</a></li>
-		<li><a href=""><img src="" alt="" /><br />导师管理</a></li>
+		<li><a href="dean/studentManage/teacherManage.jsp"><img src="image/common/5.png" alt="" /><br />导师管理</a></li>
 		<li><a href=""><img src="" alt="" /><br />师生互联</a></li>
 		<li><a href=""><img src="" alt="" /><br />超期管理</a></li>
 		<li><a href=""><img src="" alt="" /><br />毕业信息管理</a></li>
