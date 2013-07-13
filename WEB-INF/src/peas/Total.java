@@ -54,7 +54,7 @@ public class Total implements LogicControl {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");// 加载Mysql数据驱动
 			
-			connection = DriverManager.getConnection("jdbc:mysql://localhost/pybdb?characterEncoding=utf-8", "peas", "pyb15");// 创建数据连接
+			connection = DriverManager.getConnection("jdbc:mysql://114.212.135.113/pybdb", "admin", "pyb15");// 创建数据连接
 			
 		} catch (Exception e) {
 			System.out.println("Fail to connect the db!!" + e.getMessage());
@@ -559,6 +559,35 @@ public class Total implements LogicControl {
 		}
 		return resultset;
 	}
+	
+	@Override
+	public ResultSet findAllTeachers(String username) {
+		ResultSet resultset = null;
+		try {
+			Statement statement = connection.createStatement();
+			
+			String specialityno = null;
+			
+			//课程编号、课程内容、课程英文名、课程类型、学分、成绩
+			String sql = "select specialityno " +
+						 "from AcdemicInfo " +
+						 "where acdemicno = '" + username + "'"; 
+			resultset = statement.executeQuery(sql);
+			
+			while(resultset.next())
+			{
+				specialityno = resultset.getString(1);
+			}
+			sql = "select name " +
+			      "from TeacherInfo " +
+				  "where Specialityno = '" + specialityno + "'";
+			resultset = statement.executeQuery(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return resultset;
+	}
 
 	@Override
 	public ResultSet teacherManage(String username) {
@@ -818,14 +847,17 @@ public class Total implements LogicControl {
 	public static void main(String[] args) throws SQLException {
 
 		Total t = new Total();
-		String id = "101220036";
-		String pwd = "101220036";
+		String id = "122001";
+		String pwd = "123456";
 		t.login(id,pwd);
 		//t.chooseCourse("220020", id, "2012-2013", "2", 93, "", 1);
 		//ResultSet r = t.getGradeInfo(id, "2012-2013", "2");
-		ResultSet r = t.getMyCourseInfo(id, "2012-2013", "2");
+		//ResultSet r = t.getMyCourseInfo(id, "2012-2013", "2");
+		ResultSet r = t.findAllTeachers(id);
+		/*while(r.next())
+			System.out.println(r.getString(1) + r.getString(2) + r.getString(3) + r.getString(4) + r.getString(5) + r.getString(6) + r.getString(7) + r.getString(8) + r.getString(9) + r.getString(10));*/
 		while(r.next())
-			System.out.println(r.getString(1) + r.getString(2) + r.getString(3) + r.getString(4) + r.getString(5) + r.getString(6) + r.getString(7) + r.getString(8) + r.getString(9) + r.getString(10));
+			System.out.println(r.getString(1));
 		System.out.println("test over");
 		//t.login(id,pwd);
 		
