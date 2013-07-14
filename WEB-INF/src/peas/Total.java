@@ -768,15 +768,27 @@ public class Total implements LogicControl {
 	}
 
 	@Override
-	public ResultSet beyondtimeManage(String year, String degree, String nationality) {
+	public ResultSet beyondtimeManage(String year, String degree, String nationality, String username) {
 		// TODO Auto-generated method stub
 		ResultSet resultset = null;
 		try {
 			Statement statement = connection.createStatement();
+			String specialityno = null;
 			
-			String sql = "select stuname, stuno, TeacherInfo.gender, admissiontime, culturednature, birthdate, speciality, name, schoolrollstate " +
+			//课程编号、课程内容、课程英文名、课程类型、学分、成绩
+			String sql = "select specialityno " +
+						 "from AcdemicInfo " +
+						 "where acdemicno = '" + username + "'"; 
+			resultset = statement.executeQuery(sql);
+			
+			while(resultset.next())
+			{
+				specialityno = resultset.getString(1);
+			}
+			
+			sql = "select stuname, stuno, TeacherInfo.gender, admissiontime, culturednature, birthdate, speciality, name, schoolrollstate " +
 						 "from StudentInfo LEFT JOIN TeacherInfo ON StudentInfo.teacherno = TeacherInfo.teacherno LEFT JOIN MajorInfo ON StudentInfo.specialityno = MajorInfo.specialityno " +
-						 "where admissiontime = '" + year + "' and master_doctor = '" + degree + "' and nationality = '" + nationality + "'";
+						 "where admissiontime = '" + year + "' and master_doctor = '" + degree + "' and nationality = '" + nationality + "'"+ "' and StudentInfo.specialityno = '"  + specialityno + "'";
 			resultset = statement.executeQuery(sql);
 			
 		} catch (SQLException e) {

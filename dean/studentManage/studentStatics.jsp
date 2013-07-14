@@ -87,7 +87,8 @@
 	String gender = request.getParameter("gender");
 	String schoolrollstate = request.getParameter("schoolrollstate");
 	String master_doctor = request.getParameter("master_doctor");
-	String teacherno = request.getParameter("teacher").split(" ")[0];
+	String combination = request.getParameter("teacher");
+	String teacherno = (combination == null) ? null : combination.split(" ")[0];
 	if(nationality != null && culturednature != null && admissiontime != null && gender != null && schoolrollstate != null && master_doctor != null && username != null) {
 %>
 	<table class="TABLE_BODY" align="center" width="90%" bordercolor="#777777" border="1" style="border-color:#777777;border-collapse:collapse">
