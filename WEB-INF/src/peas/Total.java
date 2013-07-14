@@ -958,6 +958,39 @@ public class Total implements LogicControl {
 		return null;
 	}*/
 
+
+	@Override
+	public ResultSet speciality_CourseInfo(String username) {
+		// TODO Auto-generated method stub
+		ResultSet resultset = null;
+		try {
+			Statement statement = connection.createStatement();
+			String speciality = null;
+			
+			String sql = "select speciality " +
+						 "from AcdemicInfo,MajorInfo " +
+						 "where AcdemicInfo.specialityno = MajorInfo.specialityno and acdemicno = '" + username + "'"; 
+			resultset = statement.executeQuery(sql);
+			
+			while(resultset.next())
+			{
+				speciality = resultset.getString(1);
+			}
+			
+			//¿Î³ÌÃû³Æ£¬¿Î³Ì±àºÅ
+			sql = "select distinct coursename,courseno " +
+				  "from CourseInfo " +
+				  "where speciality = '" + speciality + "'";
+			resultset = statement.executeQuery(sql);
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return resultset;
+	}
+
 	@Override
 	public ResultSet importGrade(String username, String year, String term, String courseno, int classno) {
 		// TODO Auto-generated method stub
