@@ -54,7 +54,7 @@ public class Total implements LogicControl {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");// 加载Mysql数据驱动
 			
-			connection = DriverManager.getConnection("jdbc:mysql://114.212.135.113/pybdb", "admin", "pyb15");// 创建数据连接
+			connection = DriverManager.getConnection("jdbc:mysql://localhost/pybdb?characterEncoding=utf-8", "peas", "pyb15");// 创建数据连接
 			
 		} catch (Exception e) {
 			System.out.println("Fail to connect the db!!" + e.getMessage());
@@ -864,7 +864,7 @@ public class Total implements LogicControl {
 			}
 			
 			//学号，姓名，性别，导师，毕业日期，证书编号
-			sql = "select stuno,stuname,StudentInfo.gender,TeacherInfo.name,graduatedate,certificate_no" + 
+			sql = "select stuno,stuname,StudentInfo.gender,TeacherInfo.teacherno,TeacherInfo.name,graduatedate,certificate_no" + 
 				  " from StudentInfo LEFT JOIN TeacherInfo ON StudentInfo.teacherno = TeacherInfo.teacherno " + 
 				  "where StudentInfo.stuno = '" + stuno + "' and StudentInfo.specialityno = '" + specialityno + "'";
 			resultset = statement.executeQuery(sql);
@@ -887,7 +887,7 @@ public class Total implements LogicControl {
 			
 			String sql = "select * " +
 						 "from TeacherInfo " +
-						 "where teacherno = '" + teacherno + "' and name = '" +  name + "'";
+						 "where teacherno = '" + teacherno + "'";
 			resultset = statement.executeQuery(sql);
 			
 			if (!resultset.next()) {
