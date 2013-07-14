@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 07 月 14 日 09:35
+-- 生成日期: 2013 年 07 月 14 日 10:54
 -- 服务器版本: 5.5.31-MariaDB-log
 -- PHP 版本: 5.4.17
 
@@ -87,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `CourseInfo` (
 --
 
 INSERT INTO `CourseInfo` (`courseno`, `coursename`, `ename`, `schoolyear`, `schoolterm`, `teacherno`, `classroom`, `selcourseremark`, `coursetime`, `classno`, `startweek`, `endweek`, `numofelec`, `maxelec`, `weekno`, `grade`, `isodd`, `speciality`, `schoolarea`, `coursetype`, `credit`, `classhour`, `property`) VALUES
-('110020', '微积分1', 'Calculus', '2012-2013', '2', '122012', '仙II-111', NULL, '周五第1-2节', 1, 1, 17, 67, 80, NULL, '-1', 0, '计算机科学与技术', '仙林校区', '专业课', 5, 4, '平台'),
+('110020', '微积分1', 'Calculus', '2012-2013', '2', '122012', '仙II-111', NULL, '周五第1-2节', 1, 1, 17, 68, 80, NULL, '-1', 0, '计算机科学与技术', '仙林校区', '专业课', 5, 4, '平台'),
 ('110022', '微积分2', 'Calculus', '2012-2013', '2', '122012', '仙II-111', NULL, '周五第1-2节', 1, 1, 17, 67, 80, NULL, '-1', 0, '计算机科学与技术', '仙林校区', '专业课', 5, 4, '平台'),
 ('220020', '离散数学', 'Discrete Mathematics', '2012-2013', '2', '122012', '仙II-103', NULL, '周五第1-2节', 1, 1, 17, 67, 80, NULL, '-1', 0, '计算机科学与技术', '仙林校区', '专业课', 4, 4, '平台'),
 ('220020', '离散数学', 'Discrete Mathematics', '2012-2013', '2', '122013', '仙II-104', NULL, '周四第1-2节', 2, 1, 17, 67, 80, NULL, '2010', 0, '计算机科学与技术', '仙林校区', '专业课', 4, 4, '平台'),
@@ -125,6 +125,7 @@ CREATE TABLE IF NOT EXISTS `CourseSelection` (
 --
 
 INSERT INTO `CourseSelection` (`stuno`, `courseno`, `classno`, `schoolyear`, `schoolterm`, `score`, `remark`) VALUES
+('101220002', '110020', 1, '2012-2013', '2', 1, 'null'),
 ('101220013', '220020', 2, '2012-2013', '2', 0, ''),
 ('101220036', '220020', 2, '2012-2013', '2', 0, ''),
 ('101220036', '221020', 1, '2011-2012', '2', 90, ''),
@@ -226,29 +227,29 @@ CREATE TABLE IF NOT EXISTS `StudentInfo` (
 --
 
 INSERT INTO `StudentInfo` (`stuno`, `stuname`, `pinyin`, `gender`, `specialityno`, `admissiontime`, `birthdate`, `teacherno`, `culturednature`, `master_doctor`, `schoolrollstate`, `nationality`, `familyaddr`, `zip`, `stationname`, `homephone`, `phonenum`, `email`, `ethnicity`, `personid`, `graduatedate`, `certificate_no`) VALUES
-('101220001', '李政委', 'lizhengwei', '男', '12203', '2010', NULL, '122014', '非定向', 'master', 1, '中国大陆', NULL, NULL, NULL, NULL, NULL, NULL, '汉', '111111111111111177', '2014', '20141220001'),
-('101220002', '鲍煜坚', 'baoyujian', '男', '12201', '2010', NULL, '122013', '非定向', 'master', 1, '中国大陆', NULL, NULL, NULL, NULL, NULL, NULL, '汉', '111111111111111111', '2014', '20141220002'),
-('101220013', '陈欣', 'chenxin', '男', '12202', '2010', NULL, '122012', '非定向', 'master', 0, '中国大陆', '江苏省徐州市', '', '', '', '', '', '汉', '111111111111111122', '2014', '20141220013'),
-('101220036', '侯博建', 'houbojian', '男', '12202', '2010', NULL, '122012', '非定向', 'master', 1, '中国大陆', '江苏省泗洪县', '223900', '', '1232938', '159962656', '761131656@qq.com', '汉', '111111111111111133', '2014', '20141220036'),
-('101220042', '黄真川', 'huangzhenchuan', '男', '12202', '2010', NULL, '122012', '非定向', 'master', 1, '中国大陆', '', '', '', '', '12345678910', 'hzhchuan@gmail.com', '汉', '111111111111111144', '2014', '20141220042'),
-('101220088', '苗园', 'miaoyuan', '女', '12201', '2010', NULL, '122011', '非定向', 'master', 1, '中国大陆', NULL, NULL, NULL, NULL, NULL, NULL, '汉', '111111111111111188', '2014', NULL),
-('101220123', '吴勇', 'wuyong', '男', '12203', '2010', NULL, '122014', '非定向', 'master', 1, '中国大陆', NULL, NULL, NULL, NULL, NULL, NULL, '汉', '111111111111111155', '2014', NULL),
-('101220151', '元玉慧', 'yuanyuhui', '男', '12203', '2010', NULL, '122014', '非定向', 'master', 1, '中国大陆', NULL, NULL, NULL, NULL, NULL, NULL, '汉', '111111111111111166', '2014', NULL),
-('101220152', '猴子', 'monkey', '男', '12401', '2010', NULL, '122012', '非定向', 'master', 1, '中国大陆', NULL, NULL, NULL, NULL, NULL, NULL, '汉', '111111111111111167', '2014', NULL),
-('101220153', '小三儿', 'saner', '男', '12302', '2010', NULL, '122012', '非定向', 'master', 1, '中国大陆', NULL, NULL, NULL, NULL, NULL, NULL, '汉', '111111111111111168', '2014', NULL),
-('101220154', '语星愿', 'yuxingyuan', '女', '12301', '2010', NULL, '122013', '非定向', 'master', 1, '中国大陆', NULL, NULL, NULL, NULL, NULL, NULL, '汉', '111111111111111169', '2014', NULL),
-('101220155', '杨亚敏', 'yangyamin', '女', '12402', '2010', NULL, '122014', '非定向', 'master', 1, '中国大陆', NULL, NULL, NULL, NULL, NULL, NULL, '汉', '111111111111111170', '2014', NULL),
-('101220156', '张瑞青', 'zhangruiqing', '女', '12404', '2010', NULL, '122020', '非定向', 'master', 1, '中国大陆', NULL, NULL, NULL, NULL, NULL, NULL, '汉', '111111111111111179', NULL, NULL),
-('101220157', '张翰', 'zhanghan', '男', '12404', '2010', NULL, '122020', '非定向', 'master', 1, '中国大陆', NULL, NULL, NULL, NULL, NULL, NULL, '汉', '111111111111111180', NULL, NULL),
-('101220159', '张群', 'zhangqun', '男', '12404', '2010', NULL, '122020', '非定向', 'master', 1, '中国大陆', NULL, NULL, NULL, NULL, NULL, NULL, '汉', '111111111111111181', NULL, NULL),
-('101220160', '杨硕', 'yangshuo', '男', '12401', '2010', NULL, '122013', '非定向', 'master', 1, '中国大陆', NULL, NULL, NULL, NULL, NULL, NULL, '汉', '111111111111111182', NULL, NULL),
-('101220161', '杨静文', 'yangjingwen', '男', '12401', '2010', NULL, '122020', '非定向', 'master', 1, '中国大陆', NULL, NULL, NULL, NULL, NULL, NULL, '汉', '111111111111111186', NULL, NULL),
-('101220162', '叶涛', 'yetao', '男', '12401', '2010', NULL, '122020', '非定向', 'master', 1, '中国大陆', NULL, NULL, NULL, NULL, NULL, NULL, '汉', '11111111111111186', NULL, NULL),
-('101220163', '于畅', 'yuchang', '男', '12401', '2010', NULL, '122020', '非定向', 'master', 1, '中国大陆', NULL, NULL, NULL, NULL, NULL, NULL, '汉', '1111111111111186', NULL, NULL),
-('101220164', '周艳', 'zhouyan', '男', '12401', '2010', NULL, '122020', '非定向', 'master', 1, '中国大陆', NULL, NULL, NULL, NULL, NULL, NULL, '汉', '111111111111186', NULL, NULL),
-('101220167', '朱倩云', 'zhuqianyun', '男', '12401', '2010', NULL, '122020', '非定向', 'master', 1, '中国大陆', NULL, NULL, NULL, NULL, NULL, NULL, '汉', '111111111111181', NULL, NULL),
-('101220168', '周志远', 'zhouzhiyuan', '男', '12401', '2010', NULL, '122020', '非定向', 'master', 1, '中国大陆', NULL, NULL, NULL, NULL, NULL, NULL, '汉', '111111111111180', NULL, NULL),
-('101220169', '周晶晶', 'zhoujingjing', '男', '12401', '2010', NULL, '122011', '非定向', 'master', 1, '中国大陆', NULL, NULL, NULL, NULL, NULL, NULL, '汉', '111111111111187', '2015', '20151220169');
+('101220001', '李政委', 'lizhengwei', '男', '12203', '2010', NULL, '122014', '非定向', '硕士', 1, '中国大陆', NULL, NULL, NULL, NULL, NULL, NULL, '汉', '111111111111111177', '2014', '20141220001'),
+('101220002', '鲍煜坚', 'baoyujian', '男', '12201', '2010', NULL, '122013', '非定向', '硕士', 1, '中国大陆', NULL, NULL, NULL, NULL, NULL, NULL, '汉', '111111111111111111', '2014', '20141220002'),
+('101220013', '陈欣', 'chenxin', '男', '12202', '2010', NULL, '122012', '非定向', '硕士', 0, '中国大陆', '江苏省徐州市', '', '', '', '', '', '汉', '111111111111111122', '2014', '20141220013'),
+('101220036', '侯博建', 'houbojian', '男', '12202', '2010', NULL, '122012', '非定向', '硕士', 1, '中国大陆', '江苏省泗洪县', '223900', '', '1232938', '159962656', '761131656@qq.com', '汉', '111111111111111133', '2014', '20141220036'),
+('101220042', '黄真川', 'huangzhenchuan', '男', '12202', '2010', NULL, '122012', '非定向', '硕士', 1, '中国大陆', '', '', '', '', '12345678910', 'hzhchuan@gmail.com', '汉', '111111111111111144', '2014', '20141220042'),
+('101220088', '苗园', 'miaoyuan', '女', '12201', '2010', NULL, '122011', '非定向', '硕士', 1, '中国大陆', NULL, NULL, NULL, NULL, NULL, NULL, '汉', '111111111111111188', '2014', NULL),
+('101220123', '吴勇', 'wuyong', '男', '12203', '2010', NULL, '122014', '非定向', '硕士', 1, '中国大陆', NULL, NULL, NULL, NULL, NULL, NULL, '汉', '111111111111111155', '2014', NULL),
+('101220151', '元玉慧', 'yuanyuhui', '男', '12203', '2010', NULL, '122014', '非定向', '硕士', 1, '中国大陆', NULL, NULL, NULL, NULL, NULL, NULL, '汉', '111111111111111166', '2014', NULL),
+('101220152', '猴子', 'monkey', '男', '12401', '2010', NULL, '122012', '非定向', '硕士', 1, '中国大陆', NULL, NULL, NULL, NULL, NULL, NULL, '汉', '111111111111111167', '2014', NULL),
+('101220153', '小三儿', 'saner', '男', '12302', '2010', NULL, '122012', '非定向', '硕士', 1, '中国大陆', NULL, NULL, NULL, NULL, NULL, NULL, '汉', '111111111111111168', '2014', NULL),
+('101220154', '语星愿', 'yuxingyuan', '女', '12301', '2010', NULL, '122013', '非定向', '硕士', 1, '中国大陆', NULL, NULL, NULL, NULL, NULL, NULL, '汉', '111111111111111169', '2014', NULL),
+('101220155', '杨亚敏', 'yangyamin', '女', '12402', '2010', NULL, '122014', '非定向', '硕士', 1, '中国大陆', NULL, NULL, NULL, NULL, NULL, NULL, '汉', '111111111111111170', '2014', NULL),
+('101220156', '张瑞青', 'zhangruiqing', '女', '12404', '2010', NULL, '122020', '非定向', '硕士', 1, '中国大陆', NULL, NULL, NULL, NULL, NULL, NULL, '汉', '111111111111111179', NULL, NULL),
+('101220157', '张翰', 'zhanghan', '男', '12404', '2010', NULL, '122020', '非定向', '硕士', 1, '中国大陆', NULL, NULL, NULL, NULL, NULL, NULL, '汉', '111111111111111180', NULL, NULL),
+('101220159', '张群', 'zhangqun', '男', '12404', '2010', NULL, '122020', '非定向', '硕士', 1, '中国大陆', NULL, NULL, NULL, NULL, NULL, NULL, '汉', '111111111111111181', NULL, NULL),
+('101220160', '杨硕', 'yangshuo', '男', '12401', '2010', NULL, '122013', '非定向', '硕士', 1, '中国大陆', NULL, NULL, NULL, NULL, NULL, NULL, '汉', '111111111111111182', NULL, NULL),
+('101220161', '杨静文', 'yangjingwen', '男', '12401', '2010', NULL, '122020', '非定向', '硕士', 1, '中国大陆', NULL, NULL, NULL, NULL, NULL, NULL, '汉', '111111111111111186', NULL, NULL),
+('101220162', '叶涛', 'yetao', '男', '12401', '2010', NULL, '122020', '非定向', '硕士', 1, '中国大陆', NULL, NULL, NULL, NULL, NULL, NULL, '汉', '11111111111111186', NULL, NULL),
+('101220163', '于畅', 'yuchang', '男', '12401', '2010', NULL, '122020', '非定向', '硕士', 1, '中国大陆', NULL, NULL, NULL, NULL, NULL, NULL, '汉', '1111111111111186', NULL, NULL),
+('101220164', '周艳', 'zhouyan', '男', '12401', '2010', NULL, '122020', '非定向', '硕士', 1, '中国大陆', NULL, NULL, NULL, NULL, NULL, NULL, '汉', '111111111111186', NULL, NULL),
+('101220167', '朱倩云', 'zhuqianyun', '男', '12401', '2010', NULL, '122020', '非定向', '硕士', 1, '中国大陆', NULL, NULL, NULL, NULL, NULL, NULL, '汉', '111111111111181', NULL, NULL),
+('101220168', '周志远', 'zhouzhiyuan', '男', '12401', '2010', NULL, '122020', '非定向', '博士', 1, '中国大陆', NULL, NULL, NULL, NULL, NULL, NULL, '汉', '111111111111180', NULL, NULL),
+('101220169', '周晶晶', 'zhoujingjing', '男', '12401', '2010', NULL, '122011', '非定向', '博士', 1, '中国大陆', NULL, NULL, NULL, NULL, NULL, NULL, '汉', '111111111111187', '2015', '20151220169');
 
 -- --------------------------------------------------------
 
@@ -273,6 +274,7 @@ CREATE TABLE IF NOT EXISTS `TeacherInfo` (
 --
 
 INSERT INTO `TeacherInfo` (`teacherno`, `name`, `ename`, `gender`, `specialityno`, `title`, `remark`) VALUES
+('122009', '元玉慧', 'yuanyuhui', '男', '12201', '教授导师', ''),
 ('122011', '周志华', 'ZhouZhihua', '男', '12201', '博导', NULL),
 ('122012', '陶先平', 'TaoXianping', '男', '12202', '教授', NULL),
 ('122013', '商琳', 'ShangLin', '女', '12201', '副教授', NULL),
