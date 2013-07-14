@@ -272,13 +272,19 @@ public class Total implements LogicControl {
 				grade = resultset.getString(2);
 			}
 			
+			if (classkind=="专业课") {
 			//课程号，课程名，学分，学时，类型，性质，专业，校区
-			sql = "select distinct courseno,coursename,credit,classhour,coursetype,property,speciality,schoolarea " + 
-				  "from CourseInfo " + 
-				  "where speciality = '" + speciality + "' and coursetype = '" + classkind + "' and schoolyear = '" + schoolyear + "' and schoolterm = '" + schoolterm + "' and (grade = '" + grade + "' or grade = '-1')";
+				sql = "select distinct courseno,coursename,credit,classhour,coursetype,property,speciality,schoolarea " + 
+					  "from CourseInfo " + 
+				      "where speciality = '" + speciality + "' and coursetype = '" + classkind + "' and schoolyear = '" + schoolyear + "' and schoolterm = '" + schoolterm + "' and (grade = '" + grade + "' or grade = '-1')";
+			}
+			else {
+				sql = "select distinct courseno,coursename,credit,classhour,coursetype,property,speciality,schoolarea " + 
+					  "from CourseInfo " + 
+					  "where coursetype = '" + classkind + "' and schoolyear = '" + schoolyear + "' and schoolterm = '" + schoolterm + "' and (grade = '" + grade + "' or grade = '-1')";
+			}
+			
 			resultset = statement.executeQuery(sql);
-			
-			
 			/*try {
 				while(resultset.next())
 					System.out.println(resultset.getString(1) + resultset.getString(2) + resultset.getString(3) + resultset.getString(5));
