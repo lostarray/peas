@@ -54,7 +54,7 @@ public class Total implements LogicControl {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");// 加载Mysql数据驱动
 			
-			connection = DriverManager.getConnection("jdbc:mysql://localhost/pybdb?characterEncoding=utf-8", "peas", "pyb15");// 创建数据连接
+			connection = DriverManager.getConnection("jdbc:mysql://114.212.135.113/pybdb", "admin", "pyb15");// 创建数据连接
 			
 		} catch (Exception e) {
 			System.out.println("Fail to connect the db!!" + e.getMessage());
@@ -140,8 +140,8 @@ public class Total implements LogicControl {
 		try {
 			Statement statement = connection.createStatement();
 			
-			//学号，姓名，性别，专业代码，专业，出生年月，入学日期，导师号，导师，培养性质，攻读学位，学籍状态，国籍，身份证号，名族
-			String sql = "select stuno,stuname,StudentInfo.gender,StudentInfo.specialityno,speciality,birthdate,admissiontime,TeacherInfo.teacherno,TeacherInfo.name,culturednature,master_doctor,schoolrollstate,nationality,personid,ethnicity" + 
+			//学号，姓名，性别，专业代码，专业，出生年月，入学日期，导师，培养性质，攻读学位，学籍状态，国籍，身份证号，名族
+			String sql = "select stuno,stuname,StudentInfo.gender,StudentInfo.specialityno,speciality,birthdate,admissiontime,TeacherInfo.name,culturednature,master_doctor,schoolrollstate,nationality,personid,ethnicity" + 
 						 " from StudentInfo LEFT JOIN TeacherInfo ON StudentInfo.teacherno = TeacherInfo.teacherno LEFT JOIN MajorInfo ON StudentInfo.specialityno = MajorInfo.specialityno " + 
 						 "where StudentInfo.stuno = '" + username + "'";
 			resultset = statement.executeQuery(sql);
@@ -788,7 +788,7 @@ public class Total implements LogicControl {
 			
 			sql = "select stuname, stuno, TeacherInfo.gender, admissiontime, culturednature, birthdate, speciality, name, schoolrollstate " +
 						 "from StudentInfo LEFT JOIN TeacherInfo ON StudentInfo.teacherno = TeacherInfo.teacherno LEFT JOIN MajorInfo ON StudentInfo.specialityno = MajorInfo.specialityno " +
-						 "where admissiontime = '" + year + "' and master_doctor = '" + degree + "' and nationality = '" + nationality + "'"+ "' and StudentInfo.specialityno = '"  + specialityno + "'";
+						 "where admissiontime = '" + year + "' and master_doctor = '" + degree + "' and nationality = '" + nationality + "' and StudentInfo.specialityno = '"  + specialityno + "'";
 			resultset = statement.executeQuery(sql);
 			
 		} catch (SQLException e) {
