@@ -84,7 +84,7 @@ public class Total implements LogicControl {
 						  "where UserInfo.id = StudentInfo.stuno and UserInfo.id = '" + username + "'"; 
 				}
 				else {
-					sql = "select id,name,role" +
+					sql = "select id,acdemicname,role" +
 						  " from UserInfo,AcdemicInfo " +
 						  "where UserInfo.id = AcdemicInfo.acdemicno and UserInfo.id = '" + username + "'"; 
 				}
