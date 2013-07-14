@@ -76,6 +76,9 @@
 	</tr>
 <%
 	int index = 0;
+	admissiontime = new String(request.getParameter("admissiontime").getBytes("ISO-8859-1"), "UTF-8");
+	master_doctor = new String(request.getParameter("master_doctor").getBytes("ISO-8859-1"), "UTF-8");
+	nationality = new String(request.getParameter("nationality").getBytes("ISO-8859-1"), "UTF-8");
 	ResultSet result = total.beyondtimeManage(admissiontime, master_doctor, nationality, username);
 	while(result.next()) {
 		out.println("<tr valign=\"baseline\"  class=\"TABLE_TR_0" + (++index % 2 + 1) + "\">");
