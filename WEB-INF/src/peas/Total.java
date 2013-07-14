@@ -140,8 +140,8 @@ public class Total implements LogicControl {
 		try {
 			Statement statement = connection.createStatement();
 			
-			//学号，姓名，性别，专业代码，专业，出生年月，入学日期，导师，培养性质，攻读学位，学籍状态，国籍，身份证号，名族
-			String sql = "select stuno,stuname,StudentInfo.gender,StudentInfo.specialityno,speciality,birthdate,admissiontime,TeacherInfo.name,culturednature,master_doctor,schoolrollstate,nationality,personid,ethnicity" + 
+			//学号，姓名，性别，专业代码，专业，出生年月，入学日期，导师编号，导师名，培养性质，攻读学位，学籍状态，国籍，身份证号，名族
+			String sql = "select stuno,stuname,StudentInfo.gender,StudentInfo.specialityno,speciality,birthdate,admissiontime,TeacherInfo.teacherno,TeacherInfo.name,culturednature,master_doctor,schoolrollstate,nationality,personid,ethnicity" + 
 						 " from StudentInfo LEFT JOIN TeacherInfo ON StudentInfo.teacherno = TeacherInfo.teacherno LEFT JOIN MajorInfo ON StudentInfo.specialityno = MajorInfo.specialityno " + 
 						 "where StudentInfo.stuno = '" + username + "'";
 			resultset = statement.executeQuery(sql);
