@@ -22,7 +22,7 @@
 		<li><a href="dean/studentManage/studentStatics.jsp"><img src="image/common/6.png" alt="" /><br />学生统计</a></li>
 		<li><a href="dean/studentManage/teacherManage.jsp"><img src="image/common/5.png" alt="" /><br />导师管理</a></li>
 		<li><a href="dean/studentManage/teacherAndStudent.jsp"><img src="image/common/1.png" alt="" /><br />师生互联</a></li>
-		<li><a href=""><img src="" alt="" /><br />超期管理</a></li>
+		<li><a href="dean/studentManage/overManage.jsp"><img src="image/common/4.png" alt="" /><br />超期管理</a></li>
 		<li><a href=""><img src="" alt="" /><br />毕业信息管理</a></li>
 	</ul>
 </div>

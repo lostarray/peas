@@ -25,7 +25,6 @@
 
 <div id="Function">
 	<form action="" method="post">
-		<p>
 		<label for="">国籍	</label>
 		<select style="vertical-align:middle;" name="nationality">
 			<option value="中国大陆" selected="selected">中国大陆</option>
@@ -34,7 +33,6 @@
 			<option value="英国">英国</option>
 			<option value="新加坡">新加坡</option>
 		</select>
-		</p>
 		<label for="">培养性质	</label>
 		<select style="vertical-align:middle;" name="culturednature">
 			<option value="定向">定向</option>
@@ -45,7 +43,7 @@
 		<%
 			for(int i = 1990; i <= 2020; i++)
 				if(i == 2010)
-					out.println("<option value=\"" + i + " selected=\"selected\"\">" + i + "</option>");
+					out.println("<option value=\"" + i + "\" selected=\"selected\"\">" + i + "</option>");
 				else
 					out.println("<option value=\"" + i + "\">" + i + "</option>");
 		%>
@@ -78,8 +76,6 @@
 		</select>
 		<p><input type="submit" value="查询" /></p>
 	</form>
-</div>
-
 <%
 	String nationality = request.getParameter("nationality");
 	String culturednature = request.getParameter("culturednature");
@@ -125,3 +121,4 @@
 <%
 	}
 %>
+</div>
