@@ -25,17 +25,29 @@
 
 <div id="Function">
 	<form action="" method="post">
-		<p>国籍	<input type="text" name="nationality" /></p>
+		<p>
+		<label for="">国籍	</label>
+		<select style="vertical-align:middle;" name="nationality">
+			<option value="中国大陆" selected="selected">中国大陆</option>
+			<option value="中国台湾">中国台湾</option>
+			<option value="美国">美国</option>
+			<option value="英国">英国</option>
+			<option value="新加坡">新加坡</option>
+		</select>
+		</p>
 		<label for="">培养性质	</label>
 		<select style="vertical-align:middle;" name="culturednature">
 			<option value="定向">定向</option>
-			<option value="非定向">非定向</option>
+			<option value="非定向" selected="selected">非定向</option>
 		</select>
 		<label for="">年级	</label>
 		<select style="vertical-align:middle;" name="admissiontime">
 		<%
 			for(int i = 1990; i <= 2020; i++)
-				out.println("<option value=\"" + i + "\">" + i + "</option>");
+				if(i == 2010)
+					out.println("<option value=\"" + i + " selected=\"selected\"\">" + i + "</option>");
+				else
+					out.println("<option value=\"" + i + "\">" + i + "</option>");
 		%>
 		</select>
 		<label for="">性别	</label>
@@ -46,7 +58,7 @@
 		<label for="">学籍状态	</label>
 		<select style="vertical-align:middle;" name="schoolrollstate">
 			<option value="0">0</option>
-			<option value="1">1</option>
+			<option value="1" selected="selected">1</option>
 		</select>
 		<label for="">攻读学位	</label>
 		<select style="vertical-align:middle;" name="master_doctor">
@@ -54,12 +66,13 @@
 			<option value="博士">博士</option>
 		</select>
 		<label for="">导师	</label>
-		<select style="vertical-align:middle;" name="teacherno">
+		<select style="vertical-align:middle;" name="teacher">
 		<%
 			ResultSet teachers = total.findAllTeachers(username);
 			while(teachers.next()) {
-				String s = teachers.getString("name");
-				out.println("<option value=\"" + s + "\">" + s + "</option>");
+				String s1 = teachers.getString("teacherno");
+				String s2 = teachers.getString("name");
+				out.println("<option value=\"" + s1 + " " + s2 +"\">" + s1 + " " + s2 + "</option>");
 			}
 		%>
 		</select>
@@ -74,7 +87,7 @@
 	String gender = request.getParameter("gender");
 	String schoolrollstate = request.getParameter("schoolrollstate");
 	String master_doctor = request.getParameter("master_doctor");
-	String teacherno = request.getParameter("teacherno");
+	String teacherno = request.getParameter("teacher").split(" ")[0];
 	if(nationality != null && culturednature != null && admissiontime != null && gender != null && schoolrollstate != null && master_doctor != null && username != null) {
 %>
 	<table class="TABLE_BODY" align="center" width="90%" bordercolor="#777777" border="1" style="border-color:#777777;border-collapse:collapse">
