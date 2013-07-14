@@ -578,7 +578,7 @@ public class Total implements LogicControl {
 			{
 				specialityno = resultset.getString(1);
 			}
-			sql = "select name " +
+			sql = "select teacherno,name " +
 			      "from TeacherInfo " +
 				  "where Specialityno = '" + specialityno + "'";
 			resultset = statement.executeQuery(sql);
