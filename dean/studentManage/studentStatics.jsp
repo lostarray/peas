@@ -50,8 +50,8 @@
 		</select>
 		<label for="">攻读学位	</label>
 		<select style="vertical-align:middle;" name="master_doctor">
-			<option value="master">master</option>
-			<option value="doctor">doctor</option>
+			<option value="硕士">硕士</option>
+			<option value="博士">博士</option>
 		</select>
 		<label for="">导师	</label>
 		<select style="vertical-align:middle;" name="teacherno">
