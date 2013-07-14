@@ -56,9 +56,9 @@
 		<label for="">导师	</label>
 		<select style="vertical-align:middle;" name="teacherno">
 		<%
-			ResultSet result = total.findAllTeachers(username);
-			while(result.next()) {
-				String s = result.getString("name");
+			ResultSet teachers = total.findAllTeachers(username);
+			while(teachers.next()) {
+				String s = teachers.getString("name");
 				out.println("<option value=\"" + s + "\">" + s + "</option>");
 			}
 		%>
