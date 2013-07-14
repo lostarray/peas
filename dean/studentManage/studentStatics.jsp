@@ -84,8 +84,8 @@
 	String schoolrollstate = request.getParameter("schoolrollstate");
 	String master_doctor = request.getParameter("master_doctor");
 	String combination = request.getParameter("teacher");
-	String teacherno = (combination == null) ? null : combination.split(" ")[0];
-	if(nationality != null && culturednature != null && admissiontime != null && gender != null && schoolrollstate != null && master_doctor != null && username != null) {
+	if(nationality != null && culturednature != null && admissiontime != null && gender != null && schoolrollstate != null && master_doctor != null 
+		&& combination != null && username != null) {
 %>
 	<table class="TABLE_BODY" align="center" width="90%" bordercolor="#777777" border="1" style="border-color:#777777;border-collapse:collapse">
 	<tr align="center" class="TABLE_TH">
@@ -101,7 +101,23 @@
 		<th>详细信息</th>
 	</tr>
 <%
+	nationality = new String(request.getParameter("nationality").getBytes("ISO-8859-1"), "UTF-8");
+	culturednature = new String(request.getParameter("culturednature").getBytes("ISO-8859-1"), "UTF-8");
+	admissiontime = new String(request.getParameter("admissiontime").getBytes("ISO-8859-1"), "UTF-8");
+	gender = new String(request.getParameter("gender").getBytes("ISO-8859-1"), "UTF-8");
+	schoolrollstate = new String(request.getParameter("schoolrollstate").getBytes("ISO-8859-1"), "UTF-8");
+	master_doctor = new String(request.getParameter("master_doctor").getBytes("ISO-8859-1"), "UTF-8");
+	combination = new String(request.getParameter("teacher").getBytes("ISO-8859-1"), "UTF-8");
+	String teacherno = combination.split(" ")[0];
 	int index = 0;
+	out.println(nationality);
+	out.println(culturednature);
+	out.println(admissiontime);
+	out.println(gender);
+	out.println(schoolrollstate);
+	out.println(master_doctor);
+	out.println(teacherno);
+	out.println(username);
 	ResultSet result = total.filterStudent(nationality , culturednature, admissiontime, gender, Integer.parseInt(schoolrollstate), master_doctor, teacherno, username);
 	while(result.next()) {
 		out.println("<tr valign=\"baseline\"  class=\"TABLE_TR_0" + (++index % 2 + 1) + "\">");
@@ -113,7 +129,7 @@
 		out.println("<td vAlign=\"middle\">" + result.getString("birthdate") + "</td>");
 		out.println("<td vAlign=\"middle\">" + result.getString("speciality") + "</td>");
 		out.println("<td vAlign=\"middle\">" + result.getString("TeacherInfo.name") + "</td>");
-		out.println("<td vAlign=\"middle\">" + result.getString("schoolrollstate ") + "</td>");
+		out.println("<td vAlign=\"middle\">" + result.getString("schoolrollstate") + "</td>");
 		out.println("<td vAlign=\"middle\"><a href=\"dean/studentManage/staticInfo.jsp?studentNo=" + result.getString("stuno") + "\" style=\"color:blue;\">详细信息</td>");
 	}
 %>
