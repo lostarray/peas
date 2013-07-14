@@ -798,11 +798,11 @@ public class Total implements LogicControl {
 		return resultset;
 	}
 
-	@Override
+	/*@Override
 	public ResultSet stu_detail(String detail) {
 		// TODO Auto-generated method stub
 		return null;
-	}
+	}*/
 
 	@Override
 	public ResultSet graduateMange(String username, String year, String degree, int stustate) {
@@ -931,7 +931,6 @@ public class Total implements LogicControl {
 		try {
 			Statement statement = connection.createStatement();
 			
-			//课程编号、课程内容、课程英文名、课程类型、学分、成绩
 			String sql = "select StudentInfo.stuno,stuname,score " +
 						 "from CourseInfo,CourseSelection,StudentInfo " +
 						 "where CourseInfo.courseno = CourseSelection.courseno and CourseInfo.schoolyear = CourseSelection.schoolyear and CourseInfo.schoolterm = CourseSelection.schoolterm " +
@@ -947,88 +946,360 @@ public class Total implements LogicControl {
 		return resultset;
 	}
 
-	@Override
+	/*@Override
 	public ResultSet gradeForStu(int gradelow) {
 		// TODO Auto-generated method stub
 		return null;
-	}
+	}*/
 
 	@Override
-	public ResultSet importGrade(int year, int term, int courseno, int classno) {
+	public ResultSet importGrade(String username, String year, String term, String courseno, int classno) {
 		// TODO Auto-generated method stub
-		return null;
+		ResultSet resultset = null;
+		try {
+			Statement statement = connection.createStatement();
+			String specialityno = null;
+			
+			String sql = "select specialityno " +
+						 "from AcdemicInfo " +
+						 "where acdemicno = '" + username + "'"; 
+			resultset = statement.executeQuery(sql);
+			
+			while(resultset.next())
+			{
+				specialityno = resultset.getString(1);
+			}
+			
+			sql = "select StudentInfo.stuno,stuname,score " +
+				  "from CourseSelection,StudentInfo " +
+				  "where CourseSelection.stuno = StudentInfo.stuno and StudentInfo.specialityno = '" + specialityno + "' " +
+				  "and CourseSelection.courseno = '" + courseno + "' and CourseSelection.schoolyear = '" + year + "' and CourseSelection.schoolterm = '" + term + "' and CourseSelection.classno = '" + classno + "'";
+			resultset = statement.executeQuery(sql);
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return resultset;
 	}
 
 	@Override
-	public ResultSet addGrade(int year, int term, int courseno, int classno,
-			String stuno, String stuname, int grade) {
+	public boolean addGrade(String year, String term, String courseno, int classno, String stuno, String stuname, int grade, String remark) {
 		// TODO Auto-generated method stub
-		return null;
+		ResultSet resultset = null;
+		try {
+			//如果学生序号和姓名,课程情况不符合实际情况会返回false
+			Statement statement = connection.createStatement();
+			
+			String sql = "select * " +
+						 "from StudentInfo " +
+						 "where stuno = '" + stuno + "' and stuname = '" +  stuname + "'";
+			resultset = statement.executeQuery(sql);
+			
+			if (!resultset.next()) {
+				//System.out.println("fail!");
+				return false;
+			}
+			
+			sql = "select * " +
+				  "from CourseInfo " +
+				  "where schoolyear = '" + year + "' and schoolterm = '" + term + "' and courseno = '" + courseno + "' and classno = '"  + classno + "'";
+			resultset = statement.executeQuery(sql);
+			
+			if (!resultset.next()) {
+				//System.out.println("fail!");
+				return false;
+			}
+			
+			sql = "insert " +
+				  "into CourseSelection (stuno,courseno,classno,schoolyear,schoolterm,score,remark) " +
+				  "values ('" + stuno + "','" + courseno + "','" + classno + "','" + year + "','" + term + "','" + grade + "','" + remark + "')";
+		    statement.executeUpdate(sql);
+		    
+			return true;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+			return false;
+		}
 	}
 
 	@Override
-	public ResultSet alterGrade(int year, int term, int courseno, int classno,
-			String stuno, String stuname, int grade) {
+	public boolean alterGrade(String year, String term, String courseno, int classno, String stuno, int grade) {
 		// TODO Auto-generated method stub
-		return null;
+		ResultSet resultset = null;
+		try {
+			//修改的课程条目不符返回false
+			Statement statement = connection.createStatement();
+			
+			String sql = "select * " +
+						 "from CourseSelection " +
+			   			 "where schoolyear = '" + year + "' and schoolterm = '" + term + "' and courseno = '" + courseno + "' and classno = '"  + classno + "' and stuno = '" + stuno + "'";
+			resultset = statement.executeQuery(sql);
+			
+			if (!resultset.next()) {
+				//System.out.println("fail!");
+				return false;
+			}
+			
+			sql = "update CourseSelection " +
+	   			  "set stuno = '" + stuno + "',score = '" + grade + "'" +
+	   			  "where schoolyear = '" + year + "' and schoolterm = '" + term + "' and courseno = '" + courseno + "' and classno = '"  + classno + "' and stuno = '" + stuno + "'";
+		    statement.executeUpdate(sql);
+			return true;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+			return false;
+		}
 	}
 
 	@Override
-	public ResultSet deleteGrade(int year, int term, int courseno, int classno,
-			String stuno, String stuname, int grade) {
+	public boolean deleteGrade(String year, String term, String courseno, int classno, String stuno, int grade) {
 		// TODO Auto-generated method stub
-		return null;
+		ResultSet resultset = null;
+		try {
+			//修改的课程条目不符返回false
+			Statement statement = connection.createStatement();
+			
+			String sql = "select * " +
+						 "from CourseSelection " +
+			   			 "where schoolyear = '" + year + "' and schoolterm = '" + term + "' and courseno = '" + courseno + "' and classno = '"  + classno + "' and stuno = '" + stuno + "'";
+			resultset = statement.executeQuery(sql);
+			
+			if (!resultset.next()) {
+				//System.out.println("fail!");
+				return false;
+			}
+			
+			sql = "delete " +
+	   			  "from CourseSelection " +
+	   			  "where schoolyear = '" + year + "' and schoolterm = '" + term + "' and courseno = '" + courseno + "' and classno = '"  + classno + "' and stuno = '" + stuno + "'";
+		    statement.executeUpdate(sql);
+			return true;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+			return false;
+		}
 	}
 
-	@Override
+	/*@Override
 	public ResultSet coursesForDpt(int year, int term, String depart) {
 		// TODO Auto-generated method stub
 		return null;
-	}
+	}*/
 
 	@Override
-	public ResultSet courseSearch(int year, int term, int week, int coursetype) {
+	public ResultSet courseSearch(String username, String year, String term, String coursetype) {
 		// TODO Auto-generated method stub
-		return null;
+		ResultSet resultset = null;
+		try {
+			Statement statement = connection.createStatement();
+			String speciality = null;
+			
+			String sql = "select speciality " +
+						 "from AcdemicInfo,MajorInfo " +
+						 "where AcdemicInfo.specialityno = MajorInfo.specialityno and acdemicno = '" + username + "'"; 
+			resultset = statement.executeQuery(sql);
+			
+			while(resultset.next())
+			{
+				speciality = resultset.getString(1);
+			}
+			
+			//课程名称，课程编号，校区，年级，时间,地点，教师，起,止周数，学时，安排人数。
+			sql = "select coursename,courseno,schoolarea,grade,coursetime,classroom,TeacherInfo.name,startweek,endweek,classhour,maxelec " +
+				  "from CourseInfo,TeacherInfo " +
+				  "where TeacherInfo.teacherno = CourseInfo.teacherno and speciality = '" + speciality + "' " +
+				  "and schoolyear = '" + year + "' and schoolterm = '" + term + "' and coursetype = '" + coursetype + "'";
+			resultset = statement.executeQuery(sql);
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return resultset;
 	}
 
 	@Override
-	public ResultSet courseAlter(int courseno, String coursetime,
-			String courseAddr) {
+	public boolean courseAlter(String schoolyear, String schoolterm, String courseno, String classno, String coursename, String grade, String classhour, String coursetime, String classroom) {
 		// TODO Auto-generated method stub
-		return null;
+		ResultSet resultset = null;
+		try {
+			//修改的课程条目不存在返回false
+			Statement statement = connection.createStatement();
+			
+			String sql = "select * " +
+						 "from CourseInfo " +
+			   			 "where schoolyear = '" + schoolyear + "' and schoolterm = '" + schoolterm + "' and courseno = '" + courseno + "' and classno = '"  + classno + "'";
+			resultset = statement.executeQuery(sql);
+			
+			if (!resultset.next()) {
+				//System.out.println("fail!");
+				return false;
+			}
+			
+			sql = "update CourseInfo " +
+	   			  "set coursename = '" + coursename + "',grade = '" + grade + "',classhour = '" + classhour + "',coursetime = '" + coursetime + "',classroom = '" + classroom + "' " +
+	   			  "where schoolyear = '" + schoolyear + "' and schoolterm = '" + schoolterm + "' and courseno = '" + courseno + "' and classno = '"  + classno + "'";
+		    statement.executeUpdate(sql);
+			return true;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+			return false;
+		}
 	}
 
 	@Override
-	public ResultSet courseDelete(int courseno, String coursetime,
-			String courseAddr) {
+	public boolean courseDelete(String schoolyear, String schoolterm, String courseno, String classno) {
 		// TODO Auto-generated method stub
-		return null;
+		ResultSet resultset = null;
+		try {
+			//修改的课程条目不存在返回false
+			Statement statement = connection.createStatement();
+			
+			String sql = "select * " +
+						 "from CourseInfo " +
+			   			 "where schoolyear = '" + schoolyear + "' and schoolterm = '" + schoolterm + "' and courseno = '" + courseno + "' and classno = '"  + classno + "'";
+			resultset = statement.executeQuery(sql);
+			
+			if (!resultset.next()) {
+				System.out.println("fail!");
+				return false;
+			}
+			
+			sql = "delete " +
+	   			  "from CourseInfo " +
+	   			  "where schoolyear = '" + schoolyear + "' and schoolterm = '" + schoolterm + "' and courseno = '" + courseno + "' and classno = '"  + classno + "'";
+		    statement.executeUpdate(sql);
+			return true;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+			return false;
+		}
 	}
 
 	@Override
-	public ResultSet courseResult(int year, int term) {
+	public ResultSet courseResult(String username, String year, String term) {
 		// TODO Auto-generated method stub
-		return null;
+		ResultSet resultset = null;
+		try {
+			Statement statement = connection.createStatement();
+			String speciality = null;
+			
+			String sql = "select speciality " +
+						 "from AcdemicInfo,MajorInfo " +
+						 "where AcdemicInfo.specialityno = MajorInfo.specialityno and acdemicno = '" + username + "'"; 
+			resultset = statement.executeQuery(sql);
+			
+			while(resultset.next())
+			{
+				speciality = resultset.getString(1);
+			}
+			
+			//课程名称，任课教师，学分，学时，自选人数，安排人数
+			sql = "select coursename,TeacherInfo.name,credit,classhour,numofelec,maxelec " +
+				  "from CourseInfo,TeacherInfo " +
+				  "where TeacherInfo.teacherno = CourseInfo.teacherno and speciality = '" + speciality + "' " +
+				  "and schoolyear = '" + year + "' and schoolterm = '" + term + "'";
+			resultset = statement.executeQuery(sql);
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return resultset;
 	}
 
-	@Override
+	@Override//统计专业人数
+	public int profess(String username) {
+		// TODO Auto-generated method stub
+		ResultSet resultset = null;
+		int count = 0;
+		try {
+			Statement statement = connection.createStatement();
+			String specialityno = null;
+			
+			String sql = "select specialityno " +
+						 "from AcdemicInfo " +
+						 "where acdemicno = '" + username + "'"; 
+			resultset = statement.executeQuery(sql);
+			
+			while(resultset.next())
+			{
+				specialityno = resultset.getString(1);
+			}
+			
+			sql = "select count(*) " + 
+				  "from StudentInfo " + 
+				  "where specialityno = '" + specialityno + "'";
+			resultset = statement.executeQuery(sql);
+			
+			
+			while(resultset.next()) {
+				count = resultset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return count;
+	}
+
+	/*@Override
 	public ResultSet specialityDisplay(String username) {
 		// TODO Auto-generated method stub
 		return null;
-	}
+	}*/
 
-	@Override
+	/*@Override
 	public ResultSet esnameAlter(String specialityno, String chiname,
 			String ename) {
 		// TODO Auto-generated method stub
 		return null;
-	}
+	}*/
 
 	@Override
-	public ResultSet passwordAlter(String name, String newpassword) {
+	public boolean passwordAlter(String username, String newpassword) {
 		// TODO Auto-generated method stub
-		return null;
+		ResultSet resultset = null;
+		try {
+			//username不存在返回false
+			Statement statement = connection.createStatement();
+			
+			String sql = "select * " +
+						 "from UserInfo " +
+			   			 "where id = '" + username + "'";
+			resultset = statement.executeQuery(sql);
+			
+			if (!resultset.next()) {
+				//System.out.println("fail!");
+				return false;
+			}
+			
+			sql = "update UserInfo " +
+	   			  "set id = '" + username + "',password = '" + newpassword + "'" +
+	   			  "where id = '" + username + "'";
+		    statement.executeUpdate(sql);
+			return true;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+			return false;
+		}
 	}
 	
 	public static void main(String[] args) throws SQLException {

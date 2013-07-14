@@ -32,26 +32,27 @@ public interface LogicControl {
 	ResultSet teacherAndstudent(String username, String year, String degree);//师生互联
 	boolean optionalteacher(String stuno, String teacherno);//返回可选导师姓名列表
 	ResultSet beyondtimeManage(String year, String degree, String nationality, String username);//超期管理进入查询界面
-	ResultSet stu_detail(String detail);//点击“详细信息”进入学生信息页面
+	//ResultSet stu_detail(String detail);//点击“详细信息”进入学生信息页面
 	//Fileset exporttoExcel(String export);//点击“导出为Excel”，将结果输出到Excel文件中
 	ResultSet graduateMange(String username, String year, String degree, int stustate);//毕业信息管理，导出先不管
 	ResultSet graduateStu(String username, String stuno);//按学号搜索学生毕业信息
 	boolean altergraduateInfo(String stuno, String certificate_no, String graduatedate, String teacherno, String name);//修改毕业学生信息
 	ResultSet gradeInfo_stu(String stuno);//通过学生学号和姓名查询其成绩
 	ResultSet gradeInfo_course(String courseno, String year, String term, String teacherno);//通过课程信息查询本课程本学年本学期某位老师的课程的所有学生成绩
-	ResultSet gradeForStu(int gradelow);//查询满足学分条件的学生的各类学分统计
-	ResultSet importGrade(int year, int term, int courseno, int classno);//弹出某课程在某学期某班级的全体学生成绩列表
-	ResultSet addGrade(int year, int term, int courseno, int classno, String stuno, String stuname, int grade);//根据当前课程信息以及学生成绩信息向数据库添加一条成绩信息
-	ResultSet alterGrade(int year, int term, int courseno, int classno, String stuno, String stuname, int grade);//选择一名学生，可以修改其学号、姓名、分数
-	ResultSet deleteGrade(int year, int term, int courseno, int classno, String stuno, String stuname, int grade);//删除一名学生的分数记录
+	//ResultSet gradeForStu(int gradelow);//查询满足学分条件的学生的各类学分统计
+	ResultSet importGrade(String username, String year, String term, String courseno, int classno);//弹出某课程在某学期某班级的全体学生成绩列表
+	boolean addGrade(String year, String term, String courseno, int classno, String stuno, String stuname, int grade, String remark);//根据当前课程信息以及学生成绩信息向数据库添加一条成绩信息
+	boolean alterGrade(String year, String term, String courseno, int classno, String stuno, int grade);//选择一名学生，可以修改其学号、姓名、分数
+	boolean deleteGrade(String year, String term, String courseno, int classno, String stuno, int grade);//删除一名学生的分数记录
 	//Fileset importfromExcel();//将excel导入数据库
-	ResultSet coursesForDpt(int year, int term, String depart);//查询所在院系的课程以及人数
-	ResultSet courseSearch(int year, int term, int week, int coursetype);//排课查询
-	ResultSet courseAlter(int courseno, String coursetime, String courseAddr);//修改所查课程
-	ResultSet courseDelete(int courseno, String coursetime, String courseAddr);//删除所查课程
-	ResultSet courseResult(int year, int term);//查询选课结果
-	ResultSet specialityDisplay(String username);//输出院系专业信息
-	ResultSet esnameAlter(String specialityno, String chiname, String ename);//修改专业英文名称
-	ResultSet passwordAlter(String name, String newpassword);//修改密码
+	//ResultSet coursesForDpt(int year, int term, String depart);//查询所在院系的课程以及人数
+	ResultSet courseSearch(String username, String year, String term, String coursetype);//排课查询
+	boolean courseAlter(String schoolyear, String schoolterm, String courseno, String classno, String coursename, String grade, String classhour, String coursetime, String classroom);//修改所查课程
+	boolean courseDelete(String schoolyear, String schoolterm, String courseno, String classno);//删除所查课程
+	ResultSet courseResult(String username, String year, String term);//查询选课结果
+	int profess(String username); //统计专业人数
+	//ResultSet specialityDisplay(String username);//输出院系专业信息
+	//ResultSet esnameAlter(String specialityno, String chiname, String ename);//修改专业英文名称
+	boolean passwordAlter(String username, String newpassword);//修改密码
 
 }

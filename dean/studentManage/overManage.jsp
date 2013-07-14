@@ -25,6 +25,7 @@
 
 <div id="Function">
 	<form action="" method="post">
+		<p>
 		<label for="">国籍	</label>
 		<select style="vertical-align:middle;" name="nationality">
 			<option value="中国大陆" selected="selected">中国大陆</option>
@@ -33,11 +34,8 @@
 			<option value="英国">英国</option>
 			<option value="新加坡">新加坡</option>
 		</select>
-		<label for="">培养性质	</label>
-		<select style="vertical-align:middle;" name="culturednature">
-			<option value="定向">定向</option>
-			<option value="非定向" selected="selected">非定向</option>
-		</select>
+		</p>
+		<p>
 		<label for="">年级	</label>
 		<select style="vertical-align:middle;" name="admissiontime">
 		<%
@@ -48,44 +46,19 @@
 					out.println("<option value=\"" + i + "\">" + i + "</option>");
 		%>
 		</select>
-		<label for="">性别	</label>
-		<select style="vertical-align:middle;" name="gender">
-			<option value="男">男</option>
-			<option value="女">女</option>
-		</select>
-		<label for="">学籍状态	</label>
-		<select style="vertical-align:middle;" name="schoolrollstate">
-			<option value="0">0</option>
-			<option value="1" selected="selected">1</option>
-		</select>
+		</p>
 		<label for="">攻读学位	</label>
 		<select style="vertical-align:middle;" name="master_doctor">
 			<option value="硕士">硕士</option>
 			<option value="博士">博士</option>
 		</select>
-		<label for="">导师	</label>
-		<select style="vertical-align:middle;" name="teacher">
-		<%
-			ResultSet teachers = total.findAllTeachers(username);
-			while(teachers.next()) {
-				String s1 = teachers.getString("teacherno");
-				String s2 = teachers.getString("name");
-				out.println("<option value=\"" + s1 + " " + s2 +"\">" + s1 + " " + s2 + "</option>");
-			}
-		%>
-		</select>
 		<p><input type="submit" value="查询" /></p>
 	</form>
 <%
 	String nationality = request.getParameter("nationality");
-	String culturednature = request.getParameter("culturednature");
 	String admissiontime = request.getParameter("admissiontime");
-	String gender = request.getParameter("gender");
-	String schoolrollstate = request.getParameter("schoolrollstate");
 	String master_doctor = request.getParameter("master_doctor");
-	String combination = request.getParameter("teacher");
-	String teacherno = (combination == null) ? null : combination.split(" ")[0];
-	if(nationality != null && culturednature != null && admissiontime != null && gender != null && schoolrollstate != null && master_doctor != null && username != null) {
+	if(nationality != null && admissiontime != null && master_doctor != null && username != null) {
 %>
 	<table class="TABLE_BODY" align="center" width="90%" bordercolor="#777777" border="1" style="border-color:#777777;border-collapse:collapse">
 	<tr align="center" class="TABLE_TH">
@@ -93,6 +66,7 @@
 		<th>学生姓名</th>
 		<th align="center" >学号</th>
 		<th>性别</th>
+		<th>入学年份</th>
 		<th>培养性质</th>
 		<th>出生日期</th>
 		<th>专业</th>
@@ -102,18 +76,19 @@
 	</tr>
 <%
 	int index = 0;
-	ResultSet result = total.filterStudent(nationality , culturednature, admissiontime, gender, Integer.parseInt(schoolrollstate), master_doctor, teacherno, username);
+	ResultSet result = total.beyondtimeManage(admissiontime, master_doctor, nationality, username);
 	while(result.next()) {
 		out.println("<tr valign=\"baseline\"  class=\"TABLE_TR_0" + (++index % 2 + 1) + "\">");
 		out.println("<td align=\"center\" vAlign=\"middle\">" + index + "</td>");
 		out.println("<td vAlign=\"middle\">" + result.getString("stuname") + "</td>");
 		out.println("<td vAlign=\"middle\">" + result.getString("stuno") + "</td>");
-		out.println("<td vAlign=\"middle\">" + result.getString("StudentInfo.gender") + "</td>");
+		out.println("<td vAlign=\"middle\">" + result.getString("TeacherInfo.gender") + "</td>");
+		out.println("<td vAlign=\"middle\">" + result.getString("admissiontime") + "</td>");
 		out.println("<td vAlign=\"middle\">" + result.getString("culturednature") + "</td>");
 		out.println("<td vAlign=\"middle\">" + result.getString("birthdate") + "</td>");
 		out.println("<td vAlign=\"middle\">" + result.getString("speciality") + "</td>");
-		out.println("<td vAlign=\"middle\">" + result.getString("TeacherInfo.name") + "</td>");
-		out.println("<td vAlign=\"middle\">" + result.getString("schoolrollstate ") + "</td>");
+		out.println("<td vAlign=\"middle\">" + result.getString("name") + "</td>");
+		out.println("<td vAlign=\"middle\">" + result.getString("schoolrollstate") + "</td>");
 		out.println("<td vAlign=\"middle\"><a href=\"dean/studentManage/staticInfo.jsp?studentNo=" + result.getString("stuno") + "\" style=\"color:blue;\">详细信息</td>");
 	}
 %>
