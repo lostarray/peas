@@ -169,12 +169,13 @@ if (method == null) {
 <%
 } else if (method.equals("doAdd")) {
 	String stuname = request.getParameter("stuname");
-	stuname = new String(stuname.getBytes("ISO-8859-1"), "UTF-8");
+	if (stuname != null)
+		stuname = new String(stuname.getBytes("ISO-8859-1"), "UTF-8");
 	String score = request.getParameter("score");
 	String remark = request.getParameter("remark");
 	if (remark != null)
 		remark = new String(remark.getBytes("ISO-8859-1"), "UTF-8");
-		
+
 	boolean doAddSuccess = total.addGrade(schoolyear, schoolterm, courseno, Integer.parseInt(classno), stuno, stuname, Integer.parseInt(score), remark);
 	if (doAddSuccess)
 		out.println("<script>alert(\"添加成功\")</script>");
