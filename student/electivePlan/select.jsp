@@ -39,7 +39,7 @@ else
 String courseno = request.getParameter("courseno");
 String classno = request.getParameter("classno");
 if (classno != null) {
-	boolean chooseSuccess = total.chooseCourse(courseno, username, schoolyear, schoolterm, 0, "", Integer.parseInt(classno));
+	boolean chooseSuccess = total.chooseCourse(courseno, username, schoolyear, schoolterm, -1, "", Integer.parseInt(classno));
 	if (chooseSuccess) %>
 		<script>alert("选课成功");</script>
 <%
