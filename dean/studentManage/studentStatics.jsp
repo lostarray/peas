@@ -110,14 +110,6 @@
 	combination = new String(request.getParameter("teacher").getBytes("ISO-8859-1"), "UTF-8");
 	String teacherno = combination.split(" ")[0];
 	int index = 0;
-	out.println(nationality);
-	out.println(culturednature);
-	out.println(admissiontime);
-	out.println(gender);
-	out.println(schoolrollstate);
-	out.println(master_doctor);
-	out.println(teacherno);
-	out.println(username);
 	ResultSet result = total.filterStudent(nationality , culturednature, admissiontime, gender, Integer.parseInt(schoolrollstate), master_doctor, teacherno, username);
 	while(result.next()) {
 		out.println("<tr valign=\"baseline\"  class=\"TABLE_TR_0" + (++index % 2 + 1) + "\">");

@@ -54,7 +54,7 @@ public class Total implements LogicControl {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");// 加载Mysql数据驱动
 			
-			connection = DriverManager.getConnection("jdbc:mysql://localhost/pybdb?characterEncoding=utf-8", "peas", "pyb15");// 创建数据连接
+			connection = DriverManager.getConnection("jdbc:mysql://localhost/pybdb?characterEncoding=utf-8", "admin", "pyb15");// 创建数据连接
 			
 		} catch (Exception e) {
 			System.out.println("Fail to connect the db!!" + e.getMessage());
@@ -957,6 +957,39 @@ public class Total implements LogicControl {
 		// TODO Auto-generated method stub
 		return null;
 	}*/
+
+
+	@Override
+	public ResultSet speciality_CourseInfo(String username) {
+		// TODO Auto-generated method stub
+		ResultSet resultset = null;
+		try {
+			Statement statement = connection.createStatement();
+			String speciality = null;
+			
+			String sql = "select speciality " +
+						 "from AcdemicInfo,MajorInfo " +
+						 "where AcdemicInfo.specialityno = MajorInfo.specialityno and acdemicno = '" + username + "'"; 
+			resultset = statement.executeQuery(sql);
+			
+			while(resultset.next())
+			{
+				speciality = resultset.getString(1);
+			}
+			
+			//课程名称，课程编号
+			sql = "select distinct coursename,courseno " +
+				  "from CourseInfo " +
+				  "where speciality = '" + speciality + "'";
+			resultset = statement.executeQuery(sql);
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return resultset;
+	}
 
 	@Override
 	public ResultSet importGrade(String username, String year, String term, String courseno, int classno) {
