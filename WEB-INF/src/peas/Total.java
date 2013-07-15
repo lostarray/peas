@@ -774,14 +774,14 @@ public class Total implements LogicControl {
 	}
 
 	@Override
-	public ResultSet beyondtimeManage(String year, String degree, String nationality, String current_time, String username) {
+	public ResultSet beyondtimeManage(String year, String degree, String nationality, String currentYear, String username) {
 		// TODO Auto-generated method stub
 		ResultSet resultset = null;
 		int year_in_school = 0;
 		try {
 			Statement statement = connection.createStatement();
 			String specialityno = null;
-			year_in_school = Integer.parseInt(current_time) - Integer.parseInt(year);
+			year_in_school = Integer.parseInt(currentYear) - Integer.parseInt(year);
 			 
 			//课程编号、课程内容、课程英文名、课程类型、学分、成绩
 			String sql = "select specialityno " +
