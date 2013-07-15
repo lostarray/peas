@@ -774,13 +774,15 @@ public class Total implements LogicControl {
 	}
 
 	@Override
-	public ResultSet beyondtimeManage(String year, String degree, String nationality, String username) {
+	public ResultSet beyondtimeManage(String year, String degree, String nationality, String current_time, String username) {
 		// TODO Auto-generated method stub
 		ResultSet resultset = null;
+		int year_in_school = 0;
 		try {
 			Statement statement = connection.createStatement();
 			String specialityno = null;
-			
+			year_in_school = Integer.parseInt(current_time) - Integer.parseInt(year);
+			 
 			//课程编号、课程内容、课程英文名、课程类型、学分、成绩
 			String sql = "select specialityno " +
 						 "from AcdemicInfo " +
@@ -801,7 +803,10 @@ public class Total implements LogicControl {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return resultset;
+		if (year_in_school > 3)
+			return resultset;
+		else
+			return null;
 	}
 
 	/*@Override
@@ -1350,11 +1355,12 @@ public class Total implements LogicControl {
 		//t.chooseCourse("220020", id, "2012-2013", "2", 93, "", 1);
 		//ResultSet r = t.getGradeInfo(id, "2012-2013", "2");
 		//ResultSet r = t.getMyCourseInfo(id, "2012-2013", "2");
-		ResultSet r = t.findAllTeachers(id);
-		/*while(r.next())
-			System.out.println(r.getString(1) + r.getString(2) + r.getString(3) + r.getString(4) + r.getString(5) + r.getString(6) + r.getString(7) + r.getString(8) + r.getString(9) + r.getString(10));*/
+		//ResultSet r = t.findAllTeachers(id);
+		ResultSet r = t.beyondtimeManage("2010", "硕士", "中国大陆", "2014", "122001");
 		while(r.next())
-			System.out.println(r.getString(1));
+			System.out.println(r.getString(1) + r.getString(2) + r.getString(3) + r.getString(4) + r.getString(5) + r.getString(6) + r.getString(7) + r.getString(8) + r.getString(9));
+		/*while(r.next())
+			System.out.println(r.getString(1));*/
 		System.out.println("test over");
 		//t.login(id,pwd);
 		
