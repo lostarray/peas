@@ -66,7 +66,7 @@ if (method == null) {
 		<label for="">课程</label>
 		<select name="courseno">
 			<%
-			ResultSet rsCourse = total.courseSearch(username, schoolyear, schoolterm, coursetype);
+			ResultSet rsCourse = total.speciality_CourseInfo(username, schoolyear, schoolterm, coursetype);
 			while (rsCourse.next()) {
 				out.println("<option value=\"" + rsCourse.getString("courseno") + "\">" + rsCourse.getString("coursename") + "</option>");
 			}

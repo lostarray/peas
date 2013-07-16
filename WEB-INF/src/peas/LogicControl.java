@@ -40,7 +40,7 @@ public interface LogicControl {
 	ResultSet gradeInfo_stu(String stuno);//通过学生学号和姓名查询其成绩
 	ResultSet gradeInfo_course(String courseno, String year, String term, String teacherno);//通过课程信息查询本课程本学年本学期某位老师的课程的所有学生成绩
 	//ResultSet gradeForStu(int gradelow);//查询满足学分条件的学生的各类学分统计
-	ResultSet speciality_CourseInfo(String username); //专业所有的课程
+	ResultSet speciality_CourseInfo(String username, String year, String term, String coursetype); //专业所有的课程
 	ResultSet importGrade(String username, String year, String term, String courseno, int classno);//弹出某课程在某学期某班级的全体学生成绩列表
 	boolean addGrade(String year, String term, String courseno, int classno, String stuno, String stuname, int grade, String remark);//根据当前课程信息以及学生成绩信息向数据库添加一条成绩信息
 	boolean alterGrade(String year, String term, String courseno, int classno, String stuno, int grade);//选择一名学生，可以修改其学号、姓名、分数
@@ -54,6 +54,6 @@ public interface LogicControl {
 	int profess(String username); //统计专业人数
 	//ResultSet specialityDisplay(String username);//输出院系专业信息
 	//ResultSet esnameAlter(String specialityno, String chiname, String ename);//修改专业英文名称
-	boolean passwordAlter(String username, String newpassword);//修改密码
+	boolean passwordAlter(String username, String oldpassword, String newpassword);//修改密码
 
 }
