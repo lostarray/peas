@@ -794,7 +794,7 @@ public class Total implements LogicControl {
 				specialityno = resultset.getString(1);
 			}
 			
-			sql = "select stuname, stuno, TeacherInfo.gender, admissiontime, culturednature, birthdate, speciality, name, schoolrollstate " +
+			sql = "select stuname, stuno, StudentInfo.gender, admissiontime, culturednature, birthdate, speciality, name, schoolrollstate " +
 						 "from StudentInfo LEFT JOIN TeacherInfo ON StudentInfo.teacherno = TeacherInfo.teacherno LEFT JOIN MajorInfo ON StudentInfo.specialityno = MajorInfo.specialityno " +
 						 "where admissiontime = '" + year + "' and master_doctor = '" + degree + "' and nationality = '" + nationality + "' and StudentInfo.specialityno = '"  + specialityno + "'";
 			resultset = statement.executeQuery(sql);

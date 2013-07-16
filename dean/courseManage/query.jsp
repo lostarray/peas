@@ -21,7 +21,7 @@
 
 <%
 	String username = (String) session.getAttribute("username");
-	String currentYear = (String) application.getAttribute("currentYear");
+	int currentYear = Integer.parseInt((String) application.getAttribute("currentYear"));
 	String currentTerm = (String) application.getAttribute("currentTerm");
 %>
 
@@ -39,7 +39,7 @@
 	</form>
 <%
 	String coursetype = request.getParameter("coursetype");
-	if(username != null && currentYear != null && currentTerm != null && coursetype != null) {
+	if(username != null && currentTerm != null && coursetype != null) {
 %>
 	<table class="TABLE_BODY" align="center" width="90%" bordercolor="#777777" border="1" style="border-color:#777777;border-collapse:collapse">
 	<tr align="center" class="TABLE_TH">
@@ -59,7 +59,7 @@
 <%
 	int index = 0;
 	coursetype = new String(coursetype.getBytes("ISO-8859-1"), "UTF-8");
-	ResultSet result = total.courseSearch(username, currentYear, currentTerm, coursetype);
+	ResultSet result = total.courseSearch(username, (currentYear - 1) + "-" + currentYear, currentTerm, coursetype);
 	while(result.next()) {
 		out.println("<tr valign=\"baseline\"  class=\"TABLE_TR_0" + (++index % 2 + 1) + "\">");
 		out.println("<td align=\"center\" vAlign=\"middle\">" + index + "</td>");

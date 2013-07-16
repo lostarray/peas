@@ -81,19 +81,21 @@
 	master_doctor = new String(request.getParameter("master_doctor").getBytes("ISO-8859-1"), "UTF-8");
 	nationality = new String(request.getParameter("nationality").getBytes("ISO-8859-1"), "UTF-8");
 	ResultSet result = total.beyondtimeManage(admissiontime, master_doctor, nationality, currentYear, username);
-	while(result.next()) {
-		out.println("<tr valign=\"baseline\"  class=\"TABLE_TR_0" + (++index % 2 + 1) + "\">");
-		out.println("<td align=\"center\" vAlign=\"middle\">" + index + "</td>");
-		out.println("<td vAlign=\"middle\">" + result.getString("stuname") + "</td>");
-		out.println("<td vAlign=\"middle\">" + result.getString("stuno") + "</td>");
-		out.println("<td vAlign=\"middle\">" + result.getString("StudentInfo.gender") + "</td>");
-		out.println("<td vAlign=\"middle\">" + result.getString("admissiontime") + "</td>");
-		out.println("<td vAlign=\"middle\">" + result.getString("culturednature") + "</td>");
-		out.println("<td vAlign=\"middle\">" + result.getString("birthdate") + "</td>");
-		out.println("<td vAlign=\"middle\">" + result.getString("speciality") + "</td>");
-		out.println("<td vAlign=\"middle\">" + result.getString("name") + "</td>");
-		out.println("<td vAlign=\"middle\">" + result.getString("schoolrollstate") + "</td>");
-		out.println("<td vAlign=\"middle\"><a href=\"dean/studentManage/staticInfo.jsp?studentNo=" + result.getString("stuno") + "\" style=\"color:blue;\">详细信息</td>");
+	if(result != null) {
+		while(result.next()) {
+			out.println("<tr valign=\"baseline\"  class=\"TABLE_TR_0" + (++index % 2 + 1) + "\">");
+			out.println("<td align=\"center\" vAlign=\"middle\">" + index + "</td>");
+			out.println("<td vAlign=\"middle\">" + result.getString("stuname") + "</td>");
+			out.println("<td vAlign=\"middle\">" + result.getString("stuno") + "</td>");
+			out.println("<td vAlign=\"middle\">" + result.getString("StudentInfo.gender") + "</td>");
+			out.println("<td vAlign=\"middle\">" + result.getString("admissiontime") + "</td>");
+			out.println("<td vAlign=\"middle\">" + result.getString("culturednature") + "</td>");
+			out.println("<td vAlign=\"middle\">" + result.getString("birthdate") + "</td>");
+			out.println("<td vAlign=\"middle\">" + result.getString("speciality") + "</td>");
+			out.println("<td vAlign=\"middle\">" + result.getString("name") + "</td>");
+			out.println("<td vAlign=\"middle\">" + result.getString("schoolrollstate") + "</td>");
+			out.println("<td vAlign=\"middle\"><a href=\"dean/studentManage/staticInfo.jsp?studentNo=" + result.getString("stuno") + "\" style=\"color:blue;\">详细信息</td>");
+		}
 	}
 %>
 	</table>
