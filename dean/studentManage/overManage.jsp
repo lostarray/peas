@@ -21,6 +21,7 @@
 
 <%
 	String username = (String) session.getAttribute("username");
+	String currentYear = (String) application.getAttribute("currentYear");
 %>
 
 <div id="Function">
@@ -79,13 +80,13 @@
 	admissiontime = new String(request.getParameter("admissiontime").getBytes("ISO-8859-1"), "UTF-8");
 	master_doctor = new String(request.getParameter("master_doctor").getBytes("ISO-8859-1"), "UTF-8");
 	nationality = new String(request.getParameter("nationality").getBytes("ISO-8859-1"), "UTF-8");
-	ResultSet result = total.beyondtimeManage(admissiontime, master_doctor, nationality, username);
+	ResultSet result = total.beyondtimeManage(admissiontime, master_doctor, nationality, currentYear, username);
 	while(result.next()) {
 		out.println("<tr valign=\"baseline\"  class=\"TABLE_TR_0" + (++index % 2 + 1) + "\">");
 		out.println("<td align=\"center\" vAlign=\"middle\">" + index + "</td>");
 		out.println("<td vAlign=\"middle\">" + result.getString("stuname") + "</td>");
 		out.println("<td vAlign=\"middle\">" + result.getString("stuno") + "</td>");
-		out.println("<td vAlign=\"middle\">" + result.getString("TeacherInfo.gender") + "</td>");
+		out.println("<td vAlign=\"middle\">" + result.getString("StudentInfo.gender") + "</td>");
 		out.println("<td vAlign=\"middle\">" + result.getString("admissiontime") + "</td>");
 		out.println("<td vAlign=\"middle\">" + result.getString("culturednature") + "</td>");
 		out.println("<td vAlign=\"middle\">" + result.getString("birthdate") + "</td>");

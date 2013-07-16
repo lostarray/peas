@@ -31,7 +31,7 @@ public interface LogicControl {
 	boolean teacherDelete(String teacherno);//删除导师，返回操作结果
 	ResultSet teacherAndstudent(String username, String year, String degree);//师生互联
 	boolean optionalteacher(String stuno, String teacherno);//返回可选导师姓名列表
-	ResultSet beyondtimeManage(String year, String degree, String nationality, String username);//超期管理进入查询界面
+	ResultSet beyondtimeManage(String year, String degree, String nationality, String currentYear, String username);//超期管理进入查询界面
 	//ResultSet stu_detail(String detail);//点击“详细信息”进入学生信息页面
 	//Fileset exporttoExcel(String export);//点击“导出为Excel”，将结果输出到Excel文件中
 	ResultSet graduateMange(String username, String year, String degree, int stustate);//毕业信息管理，导出先不管
