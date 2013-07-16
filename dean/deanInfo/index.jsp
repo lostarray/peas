@@ -18,8 +18,8 @@
 
 <div id="Function">
 	<ul>
-		<li><a href=""><img src="" alt="" /><br />院系专业信息</a></li>
-		<li><a href=""><img src="" alt="" /><br />修改密码</a></li>
+		<li><a href="dean/deanInfo/population.jsp"><img src="image/common/5.png" alt="" /><br />专业人数统计</a></li>
+		<li><a href="dean/deanInfo/modifyPassword.jsp"><img src="image/dean/settings.png" alt="" /><br />修改密码</a></li>
 	</ul>
 </div>
 

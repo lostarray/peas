@@ -54,7 +54,7 @@ public class Total implements LogicControl {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");// 加载Mysql数据驱动
 			
-			connection = DriverManager.getConnection("jdbc:mysql://localhost/pybdb?characterEncoding=utf-8", "admin", "pyb15");// 创建数据连接
+			connection = DriverManager.getConnection("jdbc:mysql://localhost/pybdb?characterEncoding=utf-8", "peas", "pyb15");// 创建数据连接
 			
 		} catch (Exception e) {
 			System.out.println("Fail to connect the db!!" + e.getMessage());
@@ -960,7 +960,7 @@ public class Total implements LogicControl {
 
 
 	@Override
-	public ResultSet speciality_CourseInfo(String username) {
+	public ResultSet speciality_CourseInfo(String username, String year, String term, String coursetype) {
 		// TODO Auto-generated method stub
 		ResultSet resultset = null;
 		try {
@@ -980,7 +980,7 @@ public class Total implements LogicControl {
 			//课程名称，课程编号
 			sql = "select distinct coursename,courseno " +
 				  "from CourseInfo " +
-				  "where speciality = '" + speciality + "'";
+				  "where speciality = '" + speciality + "' and schoolyear = '" + year + "' and schoolterm = '" + term + "' and coursetype = '" + coursetype + "'";
 			resultset = statement.executeQuery(sql);
 			
 			
@@ -1311,7 +1311,7 @@ public class Total implements LogicControl {
 	}*/
 
 	@Override
-	public boolean passwordAlter(String username, String newpassword) {
+	public boolean passwordAlter(String username, String oldpassword, String newpassword) {
 		// TODO Auto-generated method stub
 		ResultSet resultset = null;
 		try {
@@ -1320,7 +1320,7 @@ public class Total implements LogicControl {
 			
 			String sql = "select * " +
 						 "from UserInfo " +
-			   			 "where id = '" + username + "'";
+			   			 "where id = '" + username + "' and password = '" + oldpassword + "'";
 			resultset = statement.executeQuery(sql);
 			
 			if (!resultset.next()) {
@@ -1329,7 +1329,7 @@ public class Total implements LogicControl {
 			}
 			
 			sql = "update UserInfo " +
-	   			  "set id = '" + username + "',password = '" + newpassword + "'" +
+	   			  "set password = '" + newpassword + "'" +
 	   			  "where id = '" + username + "'";
 		    statement.executeUpdate(sql);
 			return true;
