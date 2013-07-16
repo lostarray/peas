@@ -54,7 +54,7 @@ public class Total implements LogicControl {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");// 加载Mysql数据驱动
 			
-			connection = DriverManager.getConnection("jdbc:mysql://localhost/pybdb?characterEncoding=utf-8", "peas", "pyb15");// 创建数据连接
+			connection = DriverManager.getConnection("jdbc:mysql://localhost/pybdb?characterEncoding=utf-8", "admin", "pyb15");// 创建数据连接
 			
 		} catch (Exception e) {
 			System.out.println("Fail to connect the db!!" + e.getMessage());
@@ -1156,8 +1156,8 @@ public class Total implements LogicControl {
 				speciality = resultset.getString(1);
 			}
 			
-			//课程名称，课程编号，校区，年级，时间,地点，教师，起,止周数，学时，安排人数。
-			sql = "select coursename,courseno,schoolarea,grade,coursetime,classroom,TeacherInfo.name,startweek,endweek,classhour,maxelec " +
+			//课程名称，课程编号，班级号，校区，年级，时间,地点，教师，起,止周数，学时，安排人数。
+			sql = "select coursename,courseno,classno,schoolarea,grade,coursetime,classroom,TeacherInfo.name,startweek,endweek,classhour,maxelec " +
 				  "from CourseInfo,TeacherInfo " +
 				  "where TeacherInfo.teacherno = CourseInfo.teacherno and speciality = '" + speciality + "' " +
 				  "and schoolyear = '" + year + "' and schoolterm = '" + term + "' and coursetype = '" + coursetype + "'";
@@ -1171,6 +1171,25 @@ public class Total implements LogicControl {
 		return resultset;
 	}
 
+	@Override
+	public ResultSet courseSelect(String schoolyear, String schoolterm, String courseno, String classno) {
+		// TODO Auto-generated method stub
+		ResultSet resultset = null;
+		try {
+			//修改的课程条目不存在返回false
+			Statement statement = connection.createStatement();
+			
+			String sql = "select * " +
+						 "from CourseInfo " +
+			   			 "where schoolyear = '" + schoolyear + "' and schoolterm = '" + schoolterm + "' and courseno = '" + courseno + "' and classno = '"  + classno + "'";
+			resultset = statement.executeQuery(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return resultset;
+	}
+	
 	@Override
 	public boolean courseAlter(String schoolyear, String schoolterm, String courseno, String classno, String coursename, String grade, String classhour, String coursetime, String classroom) {
 		// TODO Auto-generated method stub

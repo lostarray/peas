@@ -48,6 +48,7 @@ public interface LogicControl {
 	//Fileset importfromExcel();//将excel导入数据库
 	//ResultSet coursesForDpt(int year, int term, String depart);//查询所在院系的课程以及人数
 	ResultSet courseSearch(String username, String year, String term, String coursetype);//排课查询
+	ResultSet courseSelect(String schoolyear, String schoolterm, String courseno, String classno);//获取所要修改课程
 	boolean courseAlter(String schoolyear, String schoolterm, String courseno, String classno, String coursename, String grade, String classhour, String coursetime, String classroom);//修改所查课程
 	boolean courseDelete(String schoolyear, String schoolterm, String courseno, String classno);//删除所查课程
 	ResultSet courseResult(String username, String year, String term);//查询选课结果

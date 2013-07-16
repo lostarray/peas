@@ -46,6 +46,7 @@
 		<th align="center">序号</th>
 		<th>课程名称</th>
 		<th align="center" >课程编号</th>
+		<th>班级编号</th>
 		<th>校区</th>
 		<th>年级</th>
 		<th>时间</th>
@@ -54,7 +55,7 @@
 		<th>起止周数</th>
 		<th>学时</th>
 		<th>安排人数</th>
-		<th>修改</th>
+		<th>操作</th>
 	</tr>
 <%
 	int index = 0;
@@ -65,6 +66,7 @@
 		out.println("<td align=\"center\" vAlign=\"middle\">" + index + "</td>");
 		out.println("<td vAlign=\"middle\">" + result.getString("coursename") + "</td>");
 		out.println("<td vAlign=\"middle\">" + result.getString("courseno") + "</td>");
+		out.println("<td vAlign=\"middle\">" + result.getString("classno") + "</td>");
 		out.println("<td vAlign=\"middle\">" + result.getString("schoolarea") + "</td>");
 		out.println("<td vAlign=\"middle\">" + result.getString("grade") + "</td>");
 		out.println("<td vAlign=\"middle\">" + result.getString("coursetime") + "</td>");
@@ -73,7 +75,7 @@
 		out.println("<td vAlign=\"middle\">" + result.getString("startweek") + "-" + result.getString("endweek") + "周" + "</td>");
 		out.println("<td vAlign=\"middle\">" + result.getString("classhour") + "</td>");
 		out.println("<td vAlign=\"middle\">" + result.getString("maxelec") + "</td>");
-		out.println("<td vAlign=\"middle\"><a href=\"dean/courseManage/operation.jsp?operation=修改\" style=\"color:blue;\">修改</td>");
+		out.println("<td vAlign=\"middle\"><a href=\"dean/courseManage/operation.jsp?operation=modify\" style=\"color:blue;\">修改</td>");
 	}
 %>
 	</table>
