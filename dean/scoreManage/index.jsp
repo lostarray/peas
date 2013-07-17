@@ -18,9 +18,8 @@
 
 <div id="Function">
 	<ul>
-		<li><a href=""><img src="" alt="" /><br />成绩查询</a></li>
-		<li><a href=""><img src="" alt="" /><br />统计学生学分情况</a></li>
-		<li><a href="dean/scoreManage/enterScore.jsp"><img src="image/common/4.png" alt="" /><br />录入成绩</a></li>
+		<li><a href="dean/scoreManage/scoreQuery.jsp"><img src="image/common/4.png" alt="" /><br />成绩查询</a></li>
+		<li><a href="dean/scoreManage/enterScore.jsp"><img src="image/common/2.png" alt="" /><br />成绩录入</a></li>
 	</ul>
 </div>
 

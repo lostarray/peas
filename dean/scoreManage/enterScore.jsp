@@ -64,7 +64,7 @@ if (method == null) {
 		</select>
 		&nbsp;&nbsp;
 		<label for="">课程</label>
-		<select name="courseno">
+		<select name="courseno" onchange="document.myform.submit()">
 			<%
 			ResultSet rsCourse = total.speciality_CourseInfo(username, schoolyear, schoolterm, coursetype);
 			while (rsCourse.next()) {
@@ -75,10 +75,12 @@ if (method == null) {
 		&nbsp;&nbsp;
 		<label for="">班级</label>
 		<select name="classno">
-			<option value="1">1</option>
-			<option value="2">2</option>
-			<option value="3">3</option>
-			<option value="4">4</option>
+			<%
+			ResultSet rsClass = total.getChosenCourseInfo(courseno, schoolyear, schoolterm);
+			while (rsClass.next()) {
+				out.println("<option value=\"" + rsClass.getString("classno") + "\">" + rsClass.getString("classno") + "</option>");
+			}
+			%>
 		</select>
 		&nbsp;&nbsp;
 		<input type="submit" value="查看" />
@@ -88,9 +90,6 @@ if (method == null) {
 		document.getElementsByName("schoolyear")[0].value="<%=schoolyear%>";
 		document.getElementsByName("schoolterm")[0].value="<%=schoolterm%>";
 		document.getElementsByName("coursetype")[0].value="<%=coursetype%>";
-		// var course = document.getElementsByName("courseno")[0];
-		// if (course.options.length > 0)
-		// 	course.options[0].selected = true;
 		document.getElementsByName("courseno")[0].value="<%=courseno%>";
 		document.getElementsByName("classno")[0].value="<%=classno%>";
 		</script>
@@ -109,7 +108,7 @@ if (method == null) {
 		</tr>
 
 		<%
-		if (courseno != null) {
+		if (classno != null) {
 			ResultSet rs = total.importGrade(username, schoolyear, schoolterm, courseno, Integer.parseInt(classno));
 			int index = 0;
 			while (rs.next()) {

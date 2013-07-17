@@ -310,8 +310,8 @@ public class Total implements LogicControl {
 		try {
 			Statement statement = connection.createStatement();
 			
-			//班级，上课地点，上课时间，教师，人数上限，已选人数
-			String sql = "select classno,classroom,coursetime,TeacherInfo.name,maxelec,numofelec " + 
+			//班级，上课地点，上课时间，教师编号，教师，人数上限，已选人数
+			String sql = "select classno,classroom,coursetime,TeacherInfo.teacherno,TeacherInfo.name,maxelec,numofelec " + 
 						 "from CourseInfo,TeacherInfo " + 
 						 "where CourseInfo.teacherno = TeacherInfo.teacherno and courseno = '" + courseno + "' and schoolyear = '" + schoolyear + "' and schoolterm = '" + schoolterm + "' " +
 						 "group by classno";
@@ -922,7 +922,7 @@ public class Total implements LogicControl {
 			Statement statement = connection.createStatement();
 			
 			//课程编号、课程内容、课程英文名、课程类型、学分、成绩
-			String sql = "select CourseInfo.courseno, CourseInfo.coursename, CourseInfo.ename, CourseInfo.coursetype, CourseInfo.credit, CourseSelection.score" +
+			String sql = "select distinct CourseInfo.courseno, CourseInfo.coursename, CourseInfo.ename, CourseInfo.coursetype, CourseInfo.credit, CourseSelection.score" +
 						 " from CourseInfo, CourseSelection" +
 						 " where CourseInfo.courseno = CourseSelection.courseno" + " and CourseSelection.stuno = '" + stuno + "'";
 			resultset = statement.executeQuery(sql);
