@@ -25,14 +25,27 @@
 	String currentTerm = (String) application.getAttribute("currentTerm");
 %>
 
+<%
+	String operation = request.getParameter("operation");
+	String deletecourseno = request.getParameter("courseno");
+	String deleteclassno = request.getParameter("classno");
+	if(operation != null && operation.equals("remove")) {
+		boolean doDeleteSuccess = total.courseDelete((currentYear - 1) + "-" + currentYear, currentTerm, deletecourseno, deleteclassno);
+		if(doDeleteSuccess)
+			out.println("<script>alert(\"删除成功\")</script>");
+		else
+			out.println("<script>alert(\"删除失败\")</script>");
+	}
+%>
+
 <div id="Function">
-	<form action="" method="post">
+	<form action="dean/courseManage/query.jsp" method="post">
 	<p>
 	<label for="">课程类型	</label>
 	<select style="vertical-align:middle;" name="coursetype">
 		<option value="专业课">专业课</option>
 		<option value="通识课">通识课</option>
-		<option value="选修课">选修课</option>
+		<option value="公选课">公选课</option>
 	</select>
 	</p>
 	<p><input type="submit" value="查询" /></p>
@@ -57,16 +70,25 @@
 		<th>安排人数</th>
 		<th>操作</th>
 	</tr>
+	<script type="text/javascript"> 
+	function show_confirm() 
+	{ 
+		var r=confirm("确定要删除该课程吗？!"); 
+		return r;
+	} 
+	</script> 
 <%
 	int index = 0;
 	coursetype = new String(coursetype.getBytes("ISO-8859-1"), "UTF-8");
 	ResultSet result = total.courseSearch(username, (currentYear - 1) + "-" + currentYear, currentTerm, coursetype);
 	while(result.next()) {
+		String courseno = result.getString("courseno");
+		String classno = result.getString("classno");
 		out.println("<tr valign=\"baseline\"  class=\"TABLE_TR_0" + (++index % 2 + 1) + "\">");
 		out.println("<td align=\"center\" vAlign=\"middle\">" + index + "</td>");
 		out.println("<td vAlign=\"middle\">" + result.getString("coursename") + "</td>");
-		out.println("<td vAlign=\"middle\">" + result.getString("courseno") + "</td>");
-		out.println("<td vAlign=\"middle\">" + result.getString("classno") + "</td>");
+		out.println("<td vAlign=\"middle\">" + courseno + "</td>");
+		out.println("<td vAlign=\"middle\">" + classno + "</td>");
 		out.println("<td vAlign=\"middle\">" + result.getString("schoolarea") + "</td>");
 		out.println("<td vAlign=\"middle\">" + result.getString("grade") + "</td>");
 		out.println("<td vAlign=\"middle\">" + result.getString("coursetime") + "</td>");
@@ -75,7 +97,8 @@
 		out.println("<td vAlign=\"middle\">" + result.getString("startweek") + "-" + result.getString("endweek") + "周" + "</td>");
 		out.println("<td vAlign=\"middle\">" + result.getString("classhour") + "</td>");
 		out.println("<td vAlign=\"middle\">" + result.getString("maxelec") + "</td>");
-		out.println("<td vAlign=\"middle\"><a href=\"dean/courseManage/operation.jsp?operation=modify\" style=\"color:blue;\">修改</td>");
+		out.println("<td vAlign=\"middle\"><a href=\"dean/courseManage/operation.jsp?operation=modify&courseno=" + courseno + "&classno=" + classno + "\" style=\"color:blue;\">修改");
+		out.println("&nbsp;&nbsp;<a href=\"dean/courseManage/query.jsp?operation=remove&courseno=" + courseno + "&classno=" + classno + "\" onclick=\"return show_confirm()\" style=\"color:blue;\">删除</td>");
 	}
 %>
 	</table>

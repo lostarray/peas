@@ -310,8 +310,8 @@ public class Total implements LogicControl {
 		try {
 			Statement statement = connection.createStatement();
 			
-			//班级，上课地点，上课时间，教师编号，教师，人数上限，已选人数
-			String sql = "select classno,classroom,coursetime,TeacherInfo.teacherno,TeacherInfo.name,maxelec,numofelec " + 
+			//班级，上课地点，上课时间，教师，人数上限，已选人数
+			String sql = "select classno,classroom,coursetime,TeacherInfo.name,maxelec,numofelec " + 
 						 "from CourseInfo,TeacherInfo " + 
 						 "where CourseInfo.teacherno = TeacherInfo.teacherno and courseno = '" + courseno + "' and schoolyear = '" + schoolyear + "' and schoolterm = '" + schoolterm + "' " +
 						 "group by classno";
@@ -922,7 +922,7 @@ public class Total implements LogicControl {
 			Statement statement = connection.createStatement();
 			
 			//课程编号、课程内容、课程英文名、课程类型、学分、成绩
-			String sql = "select distinct CourseInfo.courseno, CourseInfo.coursename, CourseInfo.ename, CourseInfo.coursetype, CourseInfo.credit, CourseSelection.score" +
+			String sql = "select CourseInfo.courseno, CourseInfo.coursename, CourseInfo.ename, CourseInfo.coursetype, CourseInfo.credit, CourseSelection.score" +
 						 " from CourseInfo, CourseSelection" +
 						 " where CourseInfo.courseno = CourseSelection.courseno" + " and CourseSelection.stuno = '" + stuno + "'";
 			resultset = statement.executeQuery(sql);
@@ -1221,7 +1221,6 @@ public class Total implements LogicControl {
 		}
 	}
 
-	@Override
 	public boolean courseDelete(String schoolyear, String schoolterm, String courseno, String classno) {
 		// TODO Auto-generated method stub
 		ResultSet resultset = null;
@@ -1235,7 +1234,17 @@ public class Total implements LogicControl {
 			resultset = statement.executeQuery(sql);
 			
 			if (!resultset.next()) {
-				System.out.println("fail!");
+				System.out.println("1");
+				return false;
+			}
+			
+			sql = "select * " + 
+				  "from CourseSelection " + 
+				  "where classno = '" + classno + "' and courseno = '" + courseno + "' and schoolyear = '" + schoolyear + "' and schoolterm = '" + schoolterm + "'";
+			resultset = statement.executeQuery(sql);
+			
+			if (resultset.next()) {
+				System.out.println("2");
 				return false;
 			}
 			
@@ -1248,6 +1257,7 @@ public class Total implements LogicControl {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			//e.printStackTrace();
+			System.out.println("3");
 			return false;
 		}
 	}
@@ -1375,9 +1385,13 @@ public class Total implements LogicControl {
 		//ResultSet r = t.getGradeInfo(id, "2012-2013", "2");
 		//ResultSet r = t.getMyCourseInfo(id, "2012-2013", "2");
 		//ResultSet r = t.findAllTeachers(id);
-		ResultSet r = t.beyondtimeManage("2010", "硕士", "中国大陆", "2014", "122001");
-		while(r.next())
-			System.out.println(r.getString(1) + r.getString(2) + r.getString(3) + r.getString(4) + r.getString(5) + r.getString(6) + r.getString(7) + r.getString(8) + r.getString(9));
+		//ResultSet r = t.beyondtimeManage("2010", "硕士", "中国大陆", "2014", "122001");
+		//boolean r = t.addGrade("2012-2013", "2", "110020", 1, "101220036", "侯博建", 2010, null);
+		boolean r = t.courseDelete("2012-2013", "2", "110020", "1");
+		if (r == false)
+			System.out.println(".....");
+		/*while(r.next())
+			System.out.println(r.getString(1) + r.getString(2) + r.getString(3) + r.getString(4) + r.getString(5) + r.getString(6) + r.getString(7) + r.getString(8) + r.getString(9));*/
 		/*while(r.next())
 			System.out.println(r.getString(1));*/
 		System.out.println("test over");

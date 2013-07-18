@@ -19,7 +19,7 @@
 <div id="Function">
 	<ul>
 		<li><a href="dean/courseManage/query.jsp"><img src="image/common/3.png" alt="" /><br />排课查询</a></li>
-		<li><a href=""><img src="" alt="" /><br />选课结果</a></li>
+		<li><a href="dean/courseManage/result.jsp"><img src="image/common/6.png" alt="" /><br />选课结果</a></li>
 	</ul>
 </div>
 
