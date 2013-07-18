@@ -32,7 +32,6 @@ if (coursetype == null) {
 	schoolyear = "2012-2013";
 	schoolterm = "2";
 	coursetype = "专业课";
-	classno = "1";
 } else {
 	coursetype = new String(coursetype.getBytes("ISO-8859-1"), "UTF-8");
 }
@@ -95,20 +94,22 @@ if (method == null) {
 		</script>
 	</form>
 
-	<a href="dean/scoreManage/enterScore.jsp?method=add&schoolyear=<%=schoolyear%>&schoolterm=<%=schoolterm%>&coursetype=<%=coursetype%>&courseno=<%=courseno%>&classno=<%=classno%>">录入成绩</a>
-	<br /><br />
+	<%
+	if (classno != null) {
+	%>
+		<a href="dean/scoreManage/enterScore.jsp?method=add&schoolyear=<%=schoolyear%>&schoolterm=<%=schoolterm%>&coursetype=<%=coursetype%>&courseno=<%=courseno%>&classno=<%=classno%>">录入成绩</a>
+		<br /><br />
 
-	<table width="80%" bordercolor="#777777" border="1" style="border-collapse:collapse">
-		<tr class="TABLE_TH">
-			<td align="center">序号</td>
-			<td align="center">学号</td>
-			<td align="center">姓名</td>
-			<td align="center">成绩</td>
-			<td align="center">其他</td>
-		</tr>
+		<table width="80%" bordercolor="#777777" border="1" style="border-collapse:collapse">
+			<tr class="TABLE_TH">
+				<td align="center">序号</td>
+				<td align="center">学号</td>
+				<td align="center">姓名</td>
+				<td align="center">成绩</td>
+				<td align="center">其他</td>
+			</tr>
 
-		<%
-		if (classno != null) {
+			<%
 			ResultSet rs = total.importGrade(username, schoolyear, schoolterm, courseno, Integer.parseInt(classno));
 			int index = 0;
 			while (rs.next()) {
